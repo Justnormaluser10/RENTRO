@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --brand-bg: #07080c;
+    --brand-surface: #0e111a;
+    --brand-surface-elevated: #141824;
+    --brand-border: rgba(255, 255, 255, 0.08);
+    --brand-border-hover: rgba(255, 255, 255, 0.16);
+    --brand-text: #ffffff;
+    --brand-muted: #94a3b8;
+    --brand-accent: #00f2aa;
+    --brand-accent-hover: #00d696;
+    --brand-accent-glow: rgba(0, 242, 170, 0.2);
+  }
+
+  * {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #07080c;
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+}
+
+/* Custom sleek futuristic scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07080c;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2433;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00f2aa;
+}
+
+/* Subtle futuristic neon glow utility */
+.neon-glow {
+  box-shadow: 0 0 25px rgba(0, 242, 170, 0.15);
+}
+
+.neon-border {
+  border-color: rgba(0, 242, 170, 0.3);
+}
+
+/* Glassmorphism card surfaces */
+.glass-panel {
+  background: rgba(14, 17, 26, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-elevated {
+  background: rgba(20, 24, 36, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Animations */
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

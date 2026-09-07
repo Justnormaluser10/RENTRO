@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Vehicle, PricingBreakdown } from '../types';
+import { useAuth } from '../context/AuthContext';
 import { useBooking } from '../context/BookingContext';
 import { apiService } from '../services/api';
 import { calculateRentalPrice } from '../lib/pricing';
 import { formatCurrency, calculateDurationHours } from '../lib/utils';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
+import { AuthModal } from '../components/ui/AuthModal';
 import { 
   Star, 
   Users, 
@@ -34,6 +36,7 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
   onProceedToCheckout,
   onSelectAlternative,
 }) => {
+  const { isAuthenticated } = useAuth();
   const { searchState, updateSearch, startDateTimeISO, endDateTimeISO, applyQuickDurationPreset } = useBooking();
   const [vehicle, setVehicle] = useState<Vehicle | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -41,6 +44,7 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
   const [isAvailable, setIsAvailable] = useState(true);
   const [isCheckingAvailability, setIsCheckingAvailability] = useState(false);
   const [alternatives, setAlternatives] = useState<Vehicle[]>([]);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   useEffect(() => {
     const fetchVehicle = async () => {
@@ -408,7 +412,14 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
               {/* Book Now Button */}
               <button
                 disabled={!isAvailable || isCheckingAvailability}
-                onClick={() => onProceedToCheckout(vehicle)}
+                onClick={() => {
+                  if (!vehicle) return;
+                  if (!isAuthenticated) {
+                    setShowAuthModal(true);
+                  } else {
+                    onProceedToCheckout(vehicle);
+                  }
+                }}
                 className="w-full py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base bg-[#00f2aa] hover:bg-[#00d696] disabled:opacity-40 disabled:cursor-not-allowed text-slate-950 shadow-xl shadow-[#00f2aa]/25 transition-all cursor-pointer"
               >
                 {isCheckingAvailability ? 'Checking Availability...' : isAvailable ? 'Book Now — Self Drive' : 'Vehicle Unavailable'}
@@ -445,12 +456,32 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
 
         <button
           disabled={!isAvailable || isCheckingAvailability}
-          onClick={() => onProceedToCheckout(vehicle)}
+          onClick={() => {
+            if (!vehicle) return;
+            if (!isAuthenticated) {
+              setShowAuthModal(true);
+            } else {
+              onProceedToCheckout(vehicle);
+            }
+          }}
           className="py-2.5 px-6 rounded-xl font-bold text-xs bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 disabled:opacity-40 cursor-pointer shadow-lg shadow-[#00f2aa]/20"
         >
           {isAvailable ? 'Book Self-Drive' : 'Unavailable'}
         </button>
       </div>
+
+      {/* On-Demand Booking Authentication Modal */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onSuccess={() => {
+          setShowAuthModal(false);
+          if (vehicle) {
+            onProceedToCheckout(vehicle);
+          }
+        }}
+        vehicleName={vehicle ? `${vehicle.brand} ${vehicle.model}` : undefined}
+      />
     </div>
   );
 };

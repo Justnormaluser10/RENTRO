@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
-import { ShieldCheck, ArrowRight, UserCheck } from 'lucide-react';
+import { Logo } from '../components/ui/Logo';
 
 interface LoginPageProps {
   onSuccess: () => void;
@@ -10,14 +9,18 @@ interface LoginPageProps {
 }
 
 export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess, onNavigateSignUp }) => {
-  const { login, switchUserRole } = useAuth();
-  const [email, setEmail] = useState('rahul.sharma@example.com');
-  const [password, setPassword] = useState('password123');
+  const { login } = useAuth();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!email || !password) {
+      setError('Please enter both your email address and password.');
+      return;
+    }
     setError(null);
     setIsLoading(true);
 
@@ -27,44 +30,25 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess, onNavigateSignU
     if (res.success) {
       onSuccess();
     } else {
-      setError(res.error || 'Invalid credentials');
+      setError(res.error || 'Invalid credentials. Please check your email and password.');
     }
-  };
-
-  const handleQuickDemoLogin = (role: 'customer' | 'admin') => {
-    switchUserRole(role);
-    onSuccess();
   };
 
   return (
     <div className="min-h-screen bg-[#07080c] text-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-7 bg-[#0e111a] p-8 rounded-3xl border border-white/10 shadow-2xl">
         
-        {/* Header */}
-        <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#111624] to-[#0a0d14] border border-white/15 text-white flex items-center justify-center mx-auto shadow-md">
-            <span className="font-black text-2xl">R</span>
+        {/* Header with Unified Brand Logo */}
+        <div className="text-center space-y-3">
+          <div className="flex justify-center">
+            <Logo size="lg" />
           </div>
           <h2 className="text-2xl font-black text-white tracking-tight">
-            Welcome to Rentro
+            Welcome Back
           </h2>
           <p className="text-xs text-slate-400">
-            Log in to manage your self-drive bookings and vehicle pickups in Ahmedabad.
+            Sign in to manage your self-drive bookings and vehicle pickups in Ahmedabad.
           </p>
-        </div>
-
-        {/* Quick Demo Credentials Box for Instant Testing */}
-        <div className="rounded-2xl bg-[#141824] border border-white/10 p-4 space-y-2">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-[#00f2aa] block">
-            ⚡ Quick 1-Click Customer Demo
-          </span>
-          <button
-            type="button"
-            onClick={() => handleQuickDemoLogin('customer')}
-            className="w-full py-2 px-3 text-xs font-bold rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors text-center cursor-pointer"
-          >
-            Instant Login as Driver (Rahul Sharma)
-          </button>
         </div>
 
         {error && (
@@ -81,6 +65,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess, onNavigateSignU
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             required
+            autoFocus
           />
 
           <Input

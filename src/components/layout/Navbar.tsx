@@ -3,6 +3,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useBooking } from '../../context/BookingContext';
 import { adminAuth } from '../../services/adminAuth';
 import { Button } from '../ui/Button';
+import { Logo } from '../ui/Logo';
 import { 
   Car, 
   Bike, 
@@ -45,26 +46,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
     <header className="sticky top-0 z-40 w-full bg-[#07080c]/85 backdrop-blur-xl border-b border-white/10 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Brand Logo */}
+          {/* Brand Logo - Unified component */}
           <div className="flex items-center gap-8">
-            <button
-              onClick={() => handleNavClick('/')}
-              className="flex items-center gap-2.5 group cursor-pointer focus:outline-none"
-            >
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#111624] to-[#0a0d14] border border-white/15 flex items-center justify-center text-white shadow-md group-hover:border-[#00f2aa]/50 transition-all">
-                <span className="font-black text-xl tracking-tight flex items-center">
-                  R<span className="w-2 h-2 rounded-full bg-[#00f2aa] inline-block ml-0.5 animate-pulse"></span>
-                </span>
-              </div>
-              <div className="text-left">
-                <span className="text-xl font-black tracking-tight text-white block leading-tight">
-                  RENTRO
-                </span>
-                <span className="text-[10px] font-bold text-[#00f2aa] tracking-widest uppercase block">
-                  Ahmedabad • Self-Drive
-                </span>
-              </div>
-            </button>
+            <Logo onClick={() => handleNavClick('/')} />
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-1">
@@ -135,14 +119,20 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
                   onClick={() => handleNavClick('/dashboard')}
                   className="flex items-center gap-2.5 p-1.5 pr-3 rounded-full hover:bg-white/5 border border-white/10 transition-colors text-left cursor-pointer"
                 >
-                  <img
-                    src={user?.avatar_url || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80'}
-                    alt={user?.full_name}
-                    className="w-7 h-7 rounded-full object-cover"
-                  />
+                  {user?.avatar_url ? (
+                    <img
+                      src={user.avatar_url}
+                      alt={user.full_name || 'User'}
+                      className="w-7 h-7 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-7 h-7 rounded-full bg-[#00f2aa]/15 border border-[#00f2aa]/30 flex items-center justify-center text-[#00f2aa] font-black text-xs">
+                      {user?.full_name ? user.full_name.charAt(0).toUpperCase() : user?.email ? user.email.charAt(0).toUpperCase() : 'U'}
+                    </div>
+                  )}
                   <div>
                     <span className="text-xs font-bold text-white block leading-tight">
-                      {user?.full_name.split(' ')[0]}
+                      {user?.full_name ? user.full_name.split(' ')[0] : user?.email ? user.email.split('@')[0] : 'Driver'}
                     </span>
                     <span className="text-[10px] text-slate-400 block leading-tight">
                       Customer

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
-import { ShieldCheck, Check } from 'lucide-react';
+import { Logo } from '../components/ui/Logo';
+import { Check } from 'lucide-react';
 
 interface SignUpPageProps {
   onSuccess: () => void;
@@ -46,9 +46,9 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onNavigateLog
   return (
     <div className="min-h-screen bg-[#07080c] text-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6 bg-[#0e111a] p-8 rounded-3xl border border-white/10 shadow-2xl">
-        <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#111624] to-[#0a0d14] border border-white/15 text-white flex items-center justify-center mx-auto shadow-md">
-            <span className="font-black text-2xl">R</span>
+        <div className="text-center space-y-3">
+          <div className="flex justify-center">
+            <Logo size="lg" />
           </div>
           <h2 className="text-2xl font-black text-white tracking-tight">
             Create Your Rentro Account
@@ -69,8 +69,9 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onNavigateLog
             label="Full Name (as per Driving Licence)"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            placeholder="e.g. Rahul Sharma"
+            placeholder="Enter your full name"
             required
+            autoFocus
           />
 
           <Input

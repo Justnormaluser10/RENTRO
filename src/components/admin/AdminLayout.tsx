@@ -1,36 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { adminAuth } from '../../services/adminAuth';
 import { Button } from '../ui/Button';
-import { Badge } from '../ui/Badge';
+import { Logo } from '../ui/Logo';
 import { 
   LayoutDashboard, 
   Car, 
   CalendarCheck2, 
   FileCheck, 
   ArrowLeft, 
-  LogOut,
-  MapPin,
-  ShieldAlert
+  LogOut
 } from 'lucide-react';
 
 interface AdminLayoutProps {
+  children: React.ReactNode;
   currentTab: 'overview' | 'vehicles' | 'bookings' | 'kyc';
   setCurrentTab: (tab: 'overview' | 'vehicles' | 'bookings' | 'kyc') => void;
   onExitAdmin: () => void;
   onLogout: () => void;
   pendingKYCCount?: number;
-  children: React.ReactNode;
 }
 
 export const AdminLayout: React.FC<AdminLayoutProps> = ({
+  children,
   currentTab,
   setCurrentTab,
   onExitAdmin,
   onLogout,
   pendingKYCCount = 0,
-  children,
 }) => {
+  const [loggingOut, setLoggingOut] = useState(false);
+
   const handleSignOut = () => {
+    setLoggingOut(true);
     adminAuth.destroySession();
     onLogout();
   };
@@ -42,15 +43,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
         <div>
           {/* Admin Header */}
           <div className="flex items-center justify-between pb-6 border-b border-white/5 mb-6">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-black text-lg shadow-sm">
-                R
-              </div>
-              <div>
-                <span className="font-extrabold text-white text-base tracking-tight block">RENTRO</span>
-                <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block">Ahmedabad Fleet</span>
-              </div>
-            </div>
+            <Logo size="sm" subtitle="Ahmedabad Fleet" onClick={onExitAdmin} />
             <span className="bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded-full">
               Live Hub
             </span>

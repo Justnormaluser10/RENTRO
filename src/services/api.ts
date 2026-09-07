@@ -358,9 +358,9 @@ export const apiService = {
       return_location: locations.find(l => l.id === params.returnLocationId),
       customer: {
         id: params.userId,
-        full_name: params.customerName || 'Hardik Patel',
-        email: params.customerEmail || 'customer@example.com',
-        phone: params.customerPhone || '+91 98250 12345',
+        full_name: params.customerName || 'Customer',
+        email: params.customerEmail || 'driver@rentro.in',
+        phone: params.customerPhone || '+91 98000 00000',
         role: 'customer',
         kyc_status: 'APPROVED',
       },
@@ -412,7 +412,7 @@ export const apiService = {
       return bookings.filter(b => b.user_id === userId);
     }
 
-    return bookings;
+    return [];
   },
 
   async getBookingById(id: string): Promise<Booking | null> {

@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { UserProfile, UserRole } from '../types';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
-import { DEMO_USER_CUSTOMER, DEMO_USER_ADMIN } from '../services/mockData';
 
 interface AuthContextType {
   user: UserProfile | null;
@@ -21,16 +20,29 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const LOCAL_USER_KEY = 'rentro_current_user';
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Website opens directly as GUEST (user === null).
+  // Restores from localStorage ONLY if a real user previously authenticated.
   const [user, setUser] = useState<UserProfile | null>(() => {
     try {
       const saved = localStorage.getItem(LOCAL_USER_KEY);
-      return saved ? JSON.parse(saved) : DEMO_USER_CUSTOMER;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Ensure no legacy demo user persists in storage
+        if (parsed?.email?.includes('hardik') || parsed?.full_name?.includes('Hardik')) {
+          localStorage.removeItem(LOCAL_USER_KEY);
+          return null;
+        }
+        return parsed;
+      }
+      return null;
     } catch {
-      return DEMO_USER_CUSTOMER;
+      return null;
     }
   });
+
   const [isLoading, setIsLoading] = useState(false);
 
+  // Sync user changes to localStorage for persistent session
   useEffect(() => {
     if (user) {
       localStorage.setItem(LOCAL_USER_KEY, JSON.stringify(user));
@@ -39,7 +51,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [user]);
 
-  // If Supabase is configured, listen to real auth changes
+  // If Supabase is configured, listen to real session and auth state changes
   useEffect(() => {
     if (!isSupabaseConfigured) return;
 
@@ -47,25 +59,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       try {
         const { data: { session } } = await supabase.auth.getSession();
         if (session?.user) {
-          const { data: profile } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', session.user.id)
-            .single();
+          let profileData: Partial<UserProfile> | null = null;
+          try {
+            const { data: profile } = await supabase
+              .from('profiles')
+              .select('*')
+              .eq('id', session.user.id)
+              .maybeSingle();
 
-          if (profile) {
-            setUser({
-              id: profile.id,
-              full_name: profile.full_name,
-              email: session.user.email || '',
-              phone: profile.phone,
-              role: profile.role,
-              dob: profile.dob,
-              address: profile.address,
-              avatar_url: profile.avatar_url,
-              kyc_status: 'APPROVED',
-            });
+            if (profile) {
+              profileData = profile;
+            }
+          } catch (profileErr) {
+            console.warn('Profile fetch warning (using auth metadata fallback):', profileErr);
           }
+
+          const resolvedUser: UserProfile = {
+            id: session.user.id,
+            full_name: profileData?.full_name || session.user.user_metadata?.full_name || session.user.email?.split('@')[0] || 'Customer',
+            email: session.user.email || '',
+            phone: profileData?.phone || session.user.user_metadata?.phone || '',
+            role: profileData?.role || 'customer',
+            dob: profileData?.dob,
+            address: profileData?.address,
+            avatar_url: profileData?.avatar_url,
+            kyc_status: profileData?.kyc_status || 'PENDING',
+          };
+          setUser(resolvedUser);
         }
       } catch (err) {
         console.warn('Session check failed:', err);
@@ -76,27 +96,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session?.user) {
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
+        let profileData: Partial<UserProfile> | null = null;
+        try {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', session.user.id)
+            .maybeSingle();
 
-        if (profile) {
-          setUser({
-            id: profile.id,
-            full_name: profile.full_name,
-            email: session.user.email || '',
-            phone: profile.phone,
-            role: profile.role,
-            dob: profile.dob,
-            address: profile.address,
-            avatar_url: profile.avatar_url,
-            kyc_status: 'APPROVED',
-          });
+          if (profile) {
+            profileData = profile;
+          }
+        } catch {
+          // fallback to auth metadata
         }
+
+        const resolvedUser: UserProfile = {
+          id: session.user.id,
+          full_name: profileData?.full_name || session.user.user_metadata?.full_name || session.user.email?.split('@')[0] || 'Customer',
+          email: session.user.email || '',
+          phone: profileData?.phone || session.user.user_metadata?.phone || '',
+          role: profileData?.role || 'customer',
+          dob: profileData?.dob,
+          address: profileData?.address,
+          avatar_url: profileData?.avatar_url,
+          kyc_status: profileData?.kyc_status || 'PENDING',
+        };
+        setUser(resolvedUser);
       } else if (event === 'SIGNED_OUT') {
         setUser(null);
+        localStorage.removeItem(LOCAL_USER_KEY);
       }
     });
 
@@ -109,25 +138,45 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(true);
     try {
       if (isSupabaseConfigured && password) {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) {
           setIsLoading(false);
           return { success: false, error: error.message };
         }
+
+        if (data.user) {
+          const resolvedUser: UserProfile = {
+            id: data.user.id,
+            full_name: data.user.user_metadata?.full_name || email.split('@')[0] || 'Customer',
+            email: data.user.email || email,
+            phone: data.user.user_metadata?.phone || '',
+            role: 'customer',
+            kyc_status: 'PENDING',
+          };
+          setUser(resolvedUser);
+        }
+
         setIsLoading(false);
         return { success: true };
       }
 
-      // Demo login
-      if (email.toLowerCase().includes('admin')) {
-        setUser(DEMO_USER_ADMIN);
-      } else {
-        setUser({
-          ...DEMO_USER_CUSTOMER,
-          email,
-          full_name: email.split('@')[0].replace('.', ' ').toUpperCase(),
-        });
-      }
+      // Clean local authentication with user's actual entered email (no fake Hardik identity)
+      const namePart = email.split('@')[0];
+      const formattedName = namePart
+        .split(/[._-]/)
+        .map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase())
+        .join(' ');
+
+      const localUser: UserProfile = {
+        id: 'usr-' + Date.now().toString(36),
+        full_name: formattedName || 'Customer',
+        email: email.trim(),
+        phone: '+91 98000 00000',
+        role: 'customer',
+        kyc_status: 'PENDING',
+      };
+
+      setUser(localUser);
       setIsLoading(false);
       return { success: true };
     } catch (err: any) {
@@ -157,25 +206,38 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
 
         if (authData.user) {
-          // Profile trigger usually handles this, or create explicitly
-          await supabase.from('profiles').upsert({
+          try {
+            await supabase.from('profiles').upsert({
+              id: authData.user.id,
+              full_name: data.fullName,
+              phone: data.phone,
+              role: 'customer',
+            });
+          } catch {
+            // Profile upsert fallback
+          }
+
+          const newUser: UserProfile = {
             id: authData.user.id,
             full_name: data.fullName,
-            phone: data.phone,
+            email: data.email,
+            phone: data.phone || '',
             role: 'customer',
-          });
+            kyc_status: 'PENDING',
+          };
+          setUser(newUser);
         }
 
         setIsLoading(false);
         return { success: true };
       }
 
-      // Demo Signup
+      // Local Signup with user's actual entered data
       const newUser: UserProfile = {
         id: 'usr-' + Date.now().toString(36),
-        full_name: data.fullName,
-        email: data.email,
-        phone: data.phone || '+91 98000 11111',
+        full_name: data.fullName.trim(),
+        email: data.email.trim(),
+        phone: data.phone?.trim() || '+91 98000 00000',
         role: 'customer',
         kyc_status: 'PENDING',
       };
@@ -189,17 +251,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = async () => {
-    if (isSupabaseConfigured) {
-      await supabase.auth.signOut();
+    try {
+      if (isSupabaseConfigured) {
+        await supabase.auth.signOut();
+      }
+    } catch (err) {
+      console.warn('Logout warning:', err);
     }
+    localStorage.removeItem(LOCAL_USER_KEY);
     setUser(null);
   };
 
   const switchUserRole = (targetRole: UserRole) => {
-    if (targetRole === 'admin') {
-      setUser(DEMO_USER_ADMIN);
-    } else {
-      setUser(DEMO_USER_CUSTOMER);
+    if (user) {
+      setUser({ ...user, role: targetRole });
     }
   };
 
@@ -208,7 +273,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const updated = { ...user, ...data };
     setUser(updated);
     if (isSupabaseConfigured) {
-      await supabase.from('profiles').update(data).eq('id', user.id);
+      try {
+        await supabase.from('profiles').update(data).eq('id', user.id);
+      } catch (err) {
+        console.warn('Profile update warning:', err);
+      }
     }
   };
 

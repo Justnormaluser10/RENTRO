@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { adminAuth } from '../../services/adminAuth';
 import { Button } from '../../components/ui/Button';
+import { Logo } from '../../components/ui/Logo';
 import { ShieldCheck, Eye, EyeOff, Lock, AlertCircle, ArrowLeft } from 'lucide-react';
 
 interface AdminLoginPageProps {
@@ -46,9 +47,9 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onSuccess, onExi
         </button>
 
         <div className="bg-[#11141e]/90 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
-          <div className="text-center space-y-2">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/10">
-              <ShieldCheck className="w-6 h-6" />
+          <div className="text-center space-y-3">
+            <div className="flex justify-center">
+              <Logo size="lg" subtitle="Ahmedabad Fleet Portal" />
             </div>
             <h1 className="text-2xl font-black text-white tracking-tight">
               Fleet Admin Portal

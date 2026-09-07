@@ -38,8 +38,13 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
 
   const fetchBookings = async () => {
+    if (!user?.id) {
+      setBookings([]);
+      setIsLoading(false);
+      return;
+    }
     setIsLoading(true);
-    const data = await apiService.getBookings(user?.id || 'usr-customer-1', 'customer');
+    const data = await apiService.getBookings(user.id, 'customer');
     setBookings(data);
     setIsLoading(false);
   };
@@ -84,6 +89,36 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
     }, 1200);
   };
 
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-[#07080c] text-white py-16 flex items-center justify-center px-4">
+        <div className="max-w-md w-full text-center bg-[#0e111a] p-8 rounded-3xl border border-white/10 shadow-2xl space-y-5">
+          <div className="w-16 h-16 rounded-2xl bg-[#00f2aa]/10 border border-[#00f2aa]/25 text-[#00f2aa] flex items-center justify-center mx-auto">
+            <Calendar className="w-8 h-8" />
+          </div>
+          <h2 className="text-2xl font-black text-white">Sign In to View Bookings</h2>
+          <p className="text-xs text-slate-400">
+            Please sign in to your Rentro account to view upcoming trips, manage active rentals, and download GST invoices.
+          </p>
+          <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="/login"
+              className="py-3 px-6 rounded-xl font-black text-xs bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 transition-all text-center cursor-pointer shadow-lg shadow-[#00f2aa]/20"
+            >
+              Sign In to Your Account
+            </a>
+            <button
+              onClick={onBrowseVehicles}
+              className="py-3 px-6 rounded-xl font-bold text-xs bg-white/5 hover:bg-white/10 text-white border border-white/10 transition-all cursor-pointer"
+            >
+              Browse Fleet
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#07080c] text-white py-10 pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -91,20 +126,28 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
         {/* Customer Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#0e111a] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl mb-8">
           <div className="flex items-center gap-4">
-            <img
-              src={user?.avatar_url || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'}
-              alt={user?.full_name}
-              className="w-16 h-16 rounded-2xl object-cover border border-white/15"
-            />
+            {user.avatar_url ? (
+              <img
+                src={user.avatar_url}
+                alt={user.full_name || 'Customer'}
+                className="w-16 h-16 rounded-2xl object-cover border border-white/15"
+              />
+            ) : (
+              <div className="w-16 h-16 rounded-2xl bg-[#00f2aa]/15 border border-[#00f2aa]/30 flex items-center justify-center text-[#00f2aa] font-black text-2xl">
+                {user.full_name ? user.full_name.charAt(0).toUpperCase() : user.email ? user.email.charAt(0).toUpperCase() : 'U'}
+              </div>
+            )}
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-2xl font-black text-white tracking-tight">
-                  {user?.full_name || 'Rahul Sharma'}
+                  {user.full_name || 'Customer'}
                 </h1>
-                <Badge variant="success" size="sm">KYC Approved</Badge>
+                <Badge variant={user.kyc_status === 'APPROVED' ? 'success' : 'warning'} size="sm">
+                  {user.kyc_status === 'APPROVED' ? 'KYC Approved' : 'KYC Pending'}
+                </Badge>
               </div>
               <p className="text-xs text-slate-400 mt-0.5">
-                {user?.email || 'rahul@example.com'} • {user?.phone || '+91 98450 12345'}
+                {user.email} {user.phone && `• ${user.phone}`}
               </p>
             </div>
           </div>

@@ -87,3 +87,56 @@
     transform: translateY(0);
   }
 }
+
+/* Leaflet Map Futuristic Dark Styling */
+.leaflet-container {
+  background: #07080c !important;
+  font-family: inherit;
+  outline: none;
+}
+
+.leaflet-tile {
+  filter: brightness(0.85) contrast(1.15) hue-rotate(180deg) invert(1) !important;
+}
+
+.leaflet-container a {
+  color: #00f2aa !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #0e111a !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-popup-tip {
+  background: #0e111a !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.leaflet-div-icon {
+  background: transparent !important;
+  border: none !important;
+}
+
+@keyframes mapPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+.animate-radar-pulse {
+  animation: mapPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+

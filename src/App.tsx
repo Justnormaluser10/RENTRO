@@ -163,12 +163,27 @@ function AppContent() {
           />
         )}
 
-        {currentPath === '/checkout' && selectedVehicleForCheckout && (
-          <CheckoutPage
-            vehicle={selectedVehicleForCheckout}
-            onBack={() => navigate(`/vehicles/${selectedVehicleForCheckout.id}`)}
-            onBookingSuccess={handleBookingSuccess}
-          />
+        {currentPath === '/checkout' && (
+          selectedVehicleForCheckout ? (
+            <CheckoutPage
+              vehicle={selectedVehicleForCheckout}
+              onBack={() => navigate(`/vehicles/${selectedVehicleForCheckout.id}`)}
+              onBookingSuccess={handleBookingSuccess}
+            />
+          ) : (
+            <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center space-y-4">
+              <h2 className="text-2xl font-black text-white">No Vehicle Selected for Checkout</h2>
+              <p className="text-xs text-slate-400 max-w-sm">
+                Please browse our self-drive fleet in Ahmedabad and select a vehicle to begin reservation.
+              </p>
+              <button
+                onClick={() => navigate('/vehicles')}
+                className="py-3 px-6 rounded-xl font-black text-xs bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 shadow-lg shadow-[#00f2aa]/20 cursor-pointer"
+              >
+                Browse Ahmedabad Fleet
+              </button>
+            </div>
+          )
         )}
 
         {currentPath.startsWith('/booking-confirmation') && (

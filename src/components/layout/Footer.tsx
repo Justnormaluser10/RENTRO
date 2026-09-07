@@ -1,4 +1,5 @@
 import React from 'react';
+import { Logo } from '../ui/Logo';
 import { Shield, Clock, Award, CheckCircle2, Phone, Mail, MapPin } from 'lucide-react';
 
 interface FooterProps {
@@ -55,12 +56,7 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
         {/* Main Footer Links & Info */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 py-12 border-b border-white/5">
           <div className="md:col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#111624] to-[#0a0d14] border border-white/15 flex items-center justify-center text-white font-black text-base shadow-md">
-                R
-              </div>
-              <span className="text-xl font-black tracking-tight text-white">RENTRO</span>
-            </div>
+            <Logo onClick={() => navigate('/')} />
             <p className="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed">
               Your ride. Your time. Premium self-drive car and bike rentals designed for Ahmedabad commuters, weekend travellers, and road trippers.
             </p>

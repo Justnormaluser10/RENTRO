@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Vehicle, PricingBreakdown } from '../types';
 import { useAuth } from '../context/AuthContext';
 import { useBooking } from '../context/BookingContext';
@@ -9,6 +9,7 @@ import { calculateRentalPrice } from '../lib/pricing';
 import { formatCurrency, formatDateTime } from '../lib/utils';
 import { Input } from '../components/ui/Input';
 import { Modal } from '../components/ui/Modal';
+import { AuthModal } from '../components/ui/AuthModal';
 import { 
   ShieldCheck, 
   Upload, 
@@ -38,15 +39,21 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
   // Checkout Step: 1 = Details & KYC, 2 = Summary & Payment
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
 
-  // Form State
-  const [fullName, setFullName] = useState(user?.full_name || 'Rahul Sharma');
-  const [email, setEmail] = useState(user?.email || 'rahul.sharma@example.com');
-  const [phone, setPhone] = useState(user?.phone || '+91 98450 12345');
-  const [licenceNumber, setLicenceNumber] = useState('GJ-01-2022-004819');
+  // Form State initialized with real user data or blank
+  const [fullName, setFullName] = useState(user?.full_name || '');
+  const [email, setEmail] = useState(user?.email || '');
+  const [phone, setPhone] = useState(user?.phone || '');
+  const [licenceNumber, setLicenceNumber] = useState('');
   const [licenceFile, setLicenceFile] = useState<File | null>(null);
-  const [licencePreviewUrl, setLicencePreviewUrl] = useState<string>(
-    'https://images.unsplash.com/photo-1607344645866-009c320c5ab8?auto=format&fit=crop&w=400&q=80'
-  );
+  const [licencePreviewUrl, setLicencePreviewUrl] = useState<string>('');
+
+  useEffect(() => {
+    if (user) {
+      if (user.full_name && !fullName) setFullName(user.full_name);
+      if (user.email && !email) setEmail(user.email);
+      if (user.phone && !phone) setPhone(user.phone);
+    }
+  }, [user]);
 
   // Processing & Error states
   const [isProcessing, setIsProcessing] = useState(false);
@@ -215,7 +222,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                     label="Full Name (as on Driving Licence)"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    placeholder="e.g. Rahul Sharma"
+                    placeholder="Enter your full name"
                     required
                   />
 
@@ -232,7 +239,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="rahul@example.com"
+                      placeholder="you@example.com"
                       required
                     />
                   </div>
@@ -251,7 +258,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                     label="Driving Licence Number"
                     value={licenceNumber}
                     onChange={(e) => setLicenceNumber(e.target.value)}
-                    placeholder="e.g. GJ-01-2022-004819"
+                    placeholder="e.g. GJ-01-2024-001234"
                     required
                   />
 
@@ -493,6 +500,14 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
           </div>
         </div>
       </Modal>
+
+      {/* Auth Gate Modal if customer arrived unauthenticated */}
+      <AuthModal
+        isOpen={!isAuthenticated}
+        onClose={onBack}
+        onSuccess={() => {}}
+        vehicleName={`${vehicle.brand} ${vehicle.model}`}
+      />
     </div>
   );
 };

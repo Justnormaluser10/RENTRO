@@ -201,32 +201,6 @@ export const AHMEDABAD_TRIPS: AhmedabadTrip[] = [
   },
 ];
 
-// =========================================================
-// DEMO PROFILES (AHMEDABAD BASED)
-// =========================================================
-export const DEMO_USER_CUSTOMER: UserProfile = {
-  id: 'usr-customer-1',
-  full_name: 'Hardik Patel',
-  email: 'hardik.patel@example.com',
-  phone: '+91 98250 12345',
-  role: 'customer',
-  dob: '1995-04-12',
-  address: 'Bodakdev, SG Highway, Ahmedabad, Gujarat',
-  avatar_url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80',
-  kyc_status: 'APPROVED',
-};
-
-export const DEMO_USER_ADMIN: UserProfile = {
-  id: 'usr-admin-1',
-  full_name: 'Rentro Fleet Manager',
-  email: 'admin@rentro.in',
-  phone: '+91 98765 00000',
-  role: 'admin',
-  dob: '1990-08-20',
-  address: 'Rentro Mobility HQ, SG Highway, Ahmedabad, Gujarat',
-  avatar_url: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=200&q=80',
-  kyc_status: 'APPROVED',
-};
-
 export const INITIAL_KYC_DOCUMENTS: KYCDocument[] = [];
 export const INITIAL_BOOKINGS: Booking[] = [];
+

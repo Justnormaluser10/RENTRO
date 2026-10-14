@@ -91,9 +91,9 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-[#07080c] text-white py-16 flex items-center justify-center px-4">
-        <div className="max-w-md w-full text-center bg-[#0e111a] p-8 rounded-3xl border border-white/10 shadow-2xl space-y-5">
-          <div className="w-16 h-16 rounded-2xl bg-[#00f2aa]/10 border border-[#00f2aa]/25 text-[#00f2aa] flex items-center justify-center mx-auto">
+      <div className="min-h-screen bg-[#080c14] text-white py-16 flex items-center justify-center px-4">
+        <div className="max-w-md w-full text-center bg-[#0e1724] p-8 rounded-3xl border border-white/10 shadow-2xl space-y-5">
+          <div className="w-16 h-16 rounded-2xl bg-[#bef237]/10 border border-[#bef237]/25 text-[#bef237] flex items-center justify-center mx-auto">
             <Calendar className="w-8 h-8" />
           </div>
           <h2 className="text-2xl font-black text-white">Sign In to View Bookings</h2>
@@ -103,7 +103,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
           <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="/login"
-              className="py-3 px-6 rounded-xl font-black text-xs bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 transition-all text-center cursor-pointer shadow-lg shadow-[#00f2aa]/20"
+              className="py-3 px-6 rounded-xl font-black text-xs bg-[#bef237] hover:bg-[#a3e635] text-slate-950 transition-all text-center cursor-pointer shadow-lg shadow-[#bef237]/20"
             >
               Sign In to Your Account
             </a>
@@ -120,11 +120,11 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
   }
 
   return (
-    <div className="min-h-screen bg-[#07080c] text-white py-10 pb-24">
+    <div className="min-h-screen bg-[#080c14] text-white py-10 pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Customer Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#0e111a] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#0e1724] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl mb-8">
           <div className="flex items-center gap-4">
             {user.avatar_url ? (
               <img
@@ -133,7 +133,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
                 className="w-16 h-16 rounded-2xl object-cover border border-white/15"
               />
             ) : (
-              <div className="w-16 h-16 rounded-2xl bg-[#00f2aa]/15 border border-[#00f2aa]/30 flex items-center justify-center text-[#00f2aa] font-black text-2xl">
+              <div className="w-16 h-16 rounded-2xl bg-[#bef237]/15 border border-[#bef237]/30 flex items-center justify-center text-[#bef237] font-black text-2xl">
                 {user.full_name ? user.full_name.charAt(0).toUpperCase() : user.email ? user.email.charAt(0).toUpperCase() : 'U'}
               </div>
             )}
@@ -154,7 +154,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
 
           <button
             onClick={onBrowseVehicles}
-            className="px-4 py-2.5 rounded-xl font-bold text-xs bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 transition-all shadow-md shadow-[#00f2aa]/20 self-start sm:self-auto cursor-pointer"
+            className="px-4 py-2.5 rounded-xl font-bold text-xs bg-[#bef237] hover:bg-[#a3e635] text-slate-950 transition-all shadow-md shadow-[#bef237]/20 self-start sm:self-auto cursor-pointer"
           >
             Book Another Ride
           </button>
@@ -166,7 +166,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
             onClick={() => setActiveTab('upcoming')}
             className={`px-4 py-2.5 text-xs font-bold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'upcoming'
-                ? 'border-[#00f2aa] text-[#00f2aa]'
+                ? 'border-[#bef237] text-[#bef237]'
                 : 'border-transparent text-slate-400 hover:text-white'
             }`}
           >
@@ -176,7 +176,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
             onClick={() => setActiveTab('active')}
             className={`px-4 py-2.5 text-xs font-bold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'active'
-                ? 'border-[#00f2aa] text-[#00f2aa]'
+                ? 'border-[#bef237] text-[#bef237]'
                 : 'border-transparent text-slate-400 hover:text-white'
             }`}
           >
@@ -186,7 +186,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
             onClick={() => setActiveTab('completed')}
             className={`px-4 py-2.5 text-xs font-bold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'completed'
-                ? 'border-[#00f2aa] text-[#00f2aa]'
+                ? 'border-[#bef237] text-[#bef237]'
                 : 'border-transparent text-slate-400 hover:text-white'
             }`}
           >
@@ -196,7 +196,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
             onClick={() => setActiveTab('cancelled')}
             className={`px-4 py-2.5 text-xs font-bold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'cancelled'
-                ? 'border-[#00f2aa] text-[#00f2aa]'
+                ? 'border-[#bef237] text-[#bef237]'
                 : 'border-transparent text-slate-400 hover:text-white'
             }`}
           >
@@ -208,21 +208,21 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
         {isLoading ? (
           <div className="space-y-4">
             {[1, 2].map((i) => (
-              <div key={i} className="h-40 rounded-3xl bg-[#0e111a] border border-white/10 animate-pulse" />
+              <div key={i} className="h-40 rounded-3xl bg-[#0e1724] border border-white/10 animate-pulse" />
             ))}
           </div>
         ) : getFilteredList().length === 0 ? (
-          <div className="bg-[#0e111a] rounded-3xl border border-white/10 p-12 text-center">
+          <div className="bg-[#0e1724] rounded-3xl border border-white/10 p-12 text-center">
             <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-slate-400 mx-auto mb-3">
-              <Calendar className="w-6 h-6 text-[#00f2aa]" />
+              <Calendar className="w-6 h-6 text-[#bef237]" />
             </div>
             <h3 className="text-base font-bold text-white">No {activeTab} bookings found</h3>
             <p className="text-xs text-slate-400 max-w-sm mx-auto mt-1 mb-6">
-              Ready for your next journey across Ahmedabad? Browse our self-drive car and bike collection now.
+              Ready for your next journey across Vadodara & Ahmedabad? Browse our self-drive collection across bikes, scooters, cars and EVs now.
             </p>
             <button
               onClick={onBrowseVehicles}
-              className="px-5 py-2.5 rounded-xl font-bold text-xs bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 cursor-pointer shadow-lg shadow-[#00f2aa]/20"
+              className="px-5 py-2.5 rounded-xl font-bold text-xs bg-[#bef237] hover:bg-[#a3e635] text-slate-950 cursor-pointer shadow-lg shadow-[#bef237]/20"
             >
               Browse Vehicles
             </button>
@@ -238,7 +238,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
               return (
                 <div
                   key={booking.id}
-                  className="bg-[#0e111a] rounded-3xl p-5 sm:p-6 border border-white/10 shadow-lg hover:border-[#00f2aa]/40 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6"
+                  className="bg-[#0e1724] rounded-3xl p-5 sm:p-6 border border-white/10 shadow-lg hover:border-[#bef237]/40 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6"
                 >
                   {/* Left Vehicle & Booking Info */}
                   <div className="flex items-start gap-4">
@@ -253,7 +253,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
                         <Badge variant={statusVariant} size="sm">
                           {booking.status}
                         </Badge>
-                        <span className="text-xs font-mono font-bold text-[#00f2aa]">
+                        <span className="text-xs font-mono font-bold text-[#bef237]">
                           {booking.booking_number}
                         </span>
                       </div>
@@ -291,7 +291,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
                       <span className="text-lg font-black text-white block mt-0.5">
                         {formatCurrency(booking.total_amount)}
                       </span>
-                      <span className="text-[10px] text-[#00f2aa] font-medium block">
+                      <span className="text-[10px] text-[#bef237] font-medium block">
                         Deposit: {formatCurrency(booking.deposit_amount)}
                       </span>
                     </div>
@@ -342,24 +342,24 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
         >
           <div className="space-y-6">
             {/* Status Strip */}
-            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#141824] border border-white/10 text-xs">
+            <div className="flex items-center justify-between p-3.5 rounded-2xl bg-[#0f1d28] border border-white/10 text-xs">
               <div>
                 <span className="text-slate-400 block">Current Status</span>
                 <span className="font-bold text-white">{selectedBooking.status}</span>
               </div>
               <div>
                 <span className="text-slate-400 block">KYC Verification</span>
-                <span className="font-bold text-[#00f2aa]">Approved</span>
+                <span className="font-bold text-[#bef237]">Approved</span>
               </div>
               <div>
                 <span className="text-slate-400 block">Payment</span>
-                <span className="font-bold text-[#00f2aa]">Success (Online)</span>
+                <span className="font-bold text-[#bef237]">Success (Online)</span>
               </div>
             </div>
 
             {/* Handover & Return Inspection Log if active or completed */}
             {selectedBooking.inspection_pickup && (
-              <div className="p-4 rounded-2xl bg-[#141824] border border-white/5 text-xs space-y-1">
+              <div className="p-4 rounded-2xl bg-[#0f1d28] border border-white/5 text-xs space-y-1">
                 <span className="font-bold text-white block">Pickup Inspection Log</span>
                 <p className="text-slate-300">
                   Odometer: {selectedBooking.inspection_pickup.odometer_reading} km • Fuel: {selectedBooking.inspection_pickup.fuel_level}%
@@ -369,7 +369,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
             )}
 
             {selectedBooking.inspection_return && (
-              <div className="p-4 rounded-2xl bg-[#141824] border border-white/5 text-xs space-y-1">
+              <div className="p-4 rounded-2xl bg-[#0f1d28] border border-white/5 text-xs space-y-1">
                 <span className="font-bold text-white block">Return Inspection Log</span>
                 <p className="text-slate-300">
                   Odometer: {selectedBooking.inspection_return.odometer_reading} km • Fuel: {selectedBooking.inspection_return.fuel_level}%
@@ -379,7 +379,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
             )}
 
             {/* Invoice Breakdown */}
-            <div className="space-y-2 text-xs border border-white/10 rounded-2xl p-4 bg-[#141824]/50">
+            <div className="space-y-2 text-xs border border-white/10 rounded-2xl p-4 bg-[#0f1d28]/50">
               <div className="flex justify-between text-slate-300">
                 <span>Rental Charge ({selectedBooking.duration_hours} hrs)</span>
                 <span className="font-semibold text-white">{formatCurrency(selectedBooking.base_amount)}</span>
@@ -394,7 +394,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
               </div>
               <div className="pt-2 border-t border-white/10 flex justify-between font-black text-sm text-white">
                 <span>Total Payable / Paid</span>
-                <span className="text-[#00f2aa] text-base">{formatCurrency(selectedBooking.total_amount)}</span>
+                <span className="text-[#bef237] text-base">{formatCurrency(selectedBooking.total_amount)}</span>
               </div>
             </div>
 
@@ -410,7 +410,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
               <button
                 type="button"
                 onClick={() => setSelectedBooking(null)}
-                className="px-5 py-2 rounded-xl text-xs font-black bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 transition-all cursor-pointer"
+                className="px-5 py-2 rounded-xl text-xs font-black bg-[#bef237] hover:bg-[#a3e635] text-slate-950 transition-all cursor-pointer"
               >
                 Close
               </button>
@@ -440,7 +440,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
               </div>
               <div className="pt-2 border-t border-amber-800/60 flex justify-between font-bold text-white">
                 <span>Estimated Total Refund:</span>
-                <span className="text-[#00f2aa] text-sm">
+                <span className="text-[#bef237] text-sm">
                   {formatCurrency(Math.round(cancellationBooking.deposit_amount + (cancellationBooking.base_amount * 0.9)))}
                 </span>
               </div>
@@ -453,7 +453,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
               <textarea
                 value={cancelReason}
                 onChange={(e) => setCancelReason(e.target.value)}
-                className="w-full text-xs p-3 rounded-xl border border-white/10 bg-[#141824] text-white"
+                className="w-full text-xs p-3 rounded-xl border border-white/10 bg-[#0f1d28] text-white"
                 rows={3}
               />
             </div>
@@ -489,9 +489,9 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
         >
           {reviewSubmitted ? (
             <div className="text-center py-6 space-y-2">
-              <CheckCircle className="w-10 h-10 text-[#00f2aa] mx-auto" />
+              <CheckCircle className="w-10 h-10 text-[#bef237] mx-auto" />
               <h4 className="font-bold text-white">Thank you for your review!</h4>
-              <p className="text-xs text-slate-400">Your feedback helps keep the Rentro fleet community safe and dependable in Ahmedabad.</p>
+              <p className="text-xs text-slate-400">Your feedback helps keep the Rentro fleet community safe and dependable across Vadodara and Ahmedabad.</p>
             </div>
           ) : (
             <form onSubmit={handleReviewSubmit} className="space-y-4">
@@ -528,7 +528,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
                   onChange={(e) => setReviewComment(e.target.value)}
                   placeholder="How was the engine performance, cleanliness, and hub pickup experience?"
                   required
-                  className="w-full text-xs p-3 rounded-xl border border-white/10 bg-[#141824] text-white"
+                  className="w-full text-xs p-3 rounded-xl border border-white/10 bg-[#0f1d28] text-white"
                   rows={4}
                 />
               </div>
@@ -543,7 +543,7 @@ export const CustomerDashboardPage: React.FC<CustomerDashboardPageProps> = ({ on
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-black bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 transition-all cursor-pointer"
+                  className="px-5 py-2 rounded-xl text-xs font-black bg-[#bef237] hover:bg-[#a3e635] text-slate-950 transition-all cursor-pointer"
                 >
                   Submit Review
                 </button>

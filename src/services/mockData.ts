@@ -49,6 +49,51 @@ export const INITIAL_LOCATIONS: Location[] = [
     contact_phone: '+91 98765 43214',
     is_active: true,
   },
+  // =========================================================
+  // VADODARA PILOT MOBILITY HUBS (Page 8 Launch Plan: Vadodara Pilot)
+  // =========================================================
+  {
+    id: 'vadodara-alkapuri',
+    name: 'Alkapuri & R.C. Dutt Road Hub',
+    city: 'Vadodara',
+    address: 'R.C. Dutt Road, Alkapuri',
+    landmark: 'Near Inox Cinema & Express Hotel',
+    contact_phone: '+91 98765 43220',
+    is_active: true,
+  },
+  {
+    id: 'vadodara-station',
+    name: 'Sayajigunj & Station Hub',
+    city: 'Vadodara',
+    address: 'Station Road, Sayajigunj',
+    landmark: 'Opposite Vadodara Central Railway Station',
+    contact_phone: '+91 98765 43221',
+    is_active: true,
+  },
+  {
+    id: 'vadodara-bhayli',
+    name: 'Gotri & Vasna-Bhayli Hub',
+    city: 'Vadodara',
+    address: 'Vasna - Bhayli Main Road',
+    landmark: 'Near Nilamber Palms, Gotri',
+    contact_phone: '+91 98765 43222',
+    is_active: true,
+  },
+];
+
+// =========================================================
+// SEARCHABLE VADODARA PILOT LOCALITIES
+// =========================================================
+export const VADODARA_LOCALITIES = [
+  { name: 'Alkapuri', zone: 'Central', popular: true, hubId: 'vadodara-alkapuri' },
+  { name: 'Sayajigunj', zone: 'Central', popular: true, hubId: 'vadodara-station' },
+  { name: 'Gotri', zone: 'West', popular: true, hubId: 'vadodara-bhayli' },
+  { name: 'Vasna-Bhayli', zone: 'West', popular: true, hubId: 'vadodara-bhayli' },
+  { name: 'Fatehgunj', zone: 'North', popular: true, hubId: 'vadodara-station' },
+  { name: 'Akota', zone: 'West', popular: false, hubId: 'vadodara-alkapuri' },
+  { name: 'Manjalpur', zone: 'South', popular: false, hubId: 'vadodara-alkapuri' },
+  { name: 'Karelibaug', zone: 'East', popular: false, hubId: 'vadodara-station' },
+  { name: 'Sama-Savli Road', zone: 'North', popular: false, hubId: 'vadodara-station' },
 ];
 
 // =========================================================

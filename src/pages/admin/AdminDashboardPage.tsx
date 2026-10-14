@@ -69,9 +69,9 @@ export const AdminDashboardPage: React.FC<AdminDashboardPageProps> = ({ onNaviga
       {/* Top Welcome & Summary */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold text-[#00f2aa] uppercase tracking-wider mb-1">
+          <div className="flex items-center gap-2 text-xs font-bold text-[#bef237] uppercase tracking-wider mb-1">
             <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Ahmedabad Fleet Operations</span>
+            <span>Vadodara & Ahmedabad Fleet Operations</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Fleet Control & Metrics

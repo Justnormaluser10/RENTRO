@@ -36,17 +36,17 @@ export const CustomerReviews: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#07080c] border-b border-white/5 relative">
+    <section className="py-24 bg-[#080c14] border-b border-white/5 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-bold text-[#00f2aa] uppercase tracking-wider block">
-            Ahmedabad Driver Stories
+          <span className="text-xs font-bold text-[#bef237] uppercase tracking-wider block">
+            Vadodara & Ahmedabad Driver Stories
           </span>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
             Customer Reviews
           </h2>
           <p className="text-xs sm:text-sm text-slate-400">
-            Real experiences from Ahmedabad locals and travellers exploring Gujarat with Rentro.
+            Real experiences from local drivers and travellers exploring Gujarat with Rentro.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export const CustomerReviews: React.FC = () => {
           {testimonials.map((review, idx) => (
             <div
               key={idx}
-              className="rounded-3xl bg-[#0e111a] border border-white/10 p-7 hover:border-[#00f2aa]/40 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-[#00f2aa]/5 group"
+              className="rounded-3xl bg-[#0e1724] border border-white/10 p-7 hover:border-[#bef237]/40 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-[#bef237]/5 group"
             >
               <div>
                 <div className="flex items-center justify-between mb-5">
@@ -80,10 +80,10 @@ export const CustomerReviews: React.FC = () => {
                 <div className="text-left">
                   <div className="flex items-center gap-1.5">
                     <span className="text-xs font-bold text-white">{review.name}</span>
-                    <CheckCircle className="w-3.5 h-3.5 text-[#00f2aa]" />
+                    <CheckCircle className="w-3.5 h-3.5 text-[#bef237]" />
                   </div>
                   <span className="text-[11px] text-slate-400 block">{review.role}</span>
-                  <span className="text-[10px] text-[#00f2aa] font-semibold block">
+                  <span className="text-[10px] text-[#bef237] font-semibold block">
                     Drove {review.vehicle}
                   </span>
                 </div>

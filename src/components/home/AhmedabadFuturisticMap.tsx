@@ -487,7 +487,7 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
 
     // Render 2: S.G. Highway (NH 147) Glowing Spine
     const sgPolyline = L.polyline(SG_HIGHWAY_PATH, {
-      color: '#00f2aa',
+      color: '#bef237',
       weight: 4.5,
       opacity: 0.9,
       lineCap: 'round',
@@ -556,8 +556,8 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
       const isSelected = activeNodeId === node.id;
 
       // Color scheme based on category
-      const colorBg = node.type === 'hub' ? '#00f2aa' : node.type === 'landmark' ? '#38bdf8' : '#94a3b8';
-      const glowColor = node.type === 'hub' ? 'rgba(0, 242, 170, 0.4)' : node.type === 'landmark' ? 'rgba(56, 189, 248, 0.4)' : 'rgba(148, 163, 184, 0.3)';
+      const colorBg = node.type === 'hub' ? '#bef237' : node.type === 'landmark' ? '#38bdf8' : '#94a3b8';
+      const glowColor = node.type === 'hub' ? 'rgba(190, 242, 55, 0.4)' : node.type === 'landmark' ? 'rgba(56, 189, 248, 0.4)' : 'rgba(148, 163, 184, 0.3)';
 
       const markerHtml = `
         <div class="relative flex items-center justify-center group cursor-pointer" style="width: 32px; height: 32px;">
@@ -566,15 +566,15 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
           
           <!-- Outer active target reticle if selected -->
           ${isSelected ? `
-            <div class="absolute -inset-1.5 rounded-full border-2 border-[#00f2aa] animate-ping opacity-75"></div>
-            <div class="absolute -inset-2.5 rounded-full border border-[#00f2aa]/40"></div>
+            <div class="absolute -inset-1.5 rounded-full border-2 border-[#bef237] animate-ping opacity-75"></div>
+            <div class="absolute -inset-2.5 rounded-full border border-[#bef237]/40"></div>
           ` : ''}
 
           <!-- Center Node Dot -->
-          <div class="relative z-10 w-3.5 h-3.5 rounded-full border-2 border-[#07080c] shadow-lg transition-transform group-hover:scale-125" style="background-color: ${colorBg};"></div>
+          <div class="relative z-10 w-3.5 h-3.5 rounded-full border-2 border-[#080c14] shadow-lg transition-transform group-hover:scale-125" style="background-color: ${colorBg};"></div>
           
           <!-- Label Tooltip -->
-          <div class="absolute top-5 z-20 whitespace-nowrap px-2 py-0.5 rounded-md text-[10px] font-bold tracking-tight bg-[#0e111a]/95 text-white border border-white/15 pointer-events-none shadow-xl ${isSelected ? 'border-[#00f2aa] text-[#00f2aa]' : 'opacity-85'}">
+          <div class="absolute top-5 z-20 whitespace-nowrap px-2 py-0.5 rounded-md text-[10px] font-bold tracking-tight bg-[#0e1724]/95 text-white border border-white/15 pointer-events-none shadow-xl ${isSelected ? 'border-[#bef237] text-[#bef237]' : 'opacity-85'}">
             ${node.name}
           </div>
         </div>
@@ -622,9 +622,9 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
   };
 
   return (
-    <section className="py-20 bg-[#07080c] border-b border-white/5 relative overflow-hidden">
+    <section className="py-20 bg-[#080c14] border-b border-white/5 relative overflow-hidden">
       {/* Background glow effects */}
-      <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#00f2aa]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#bef237]/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#06b6d4]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -632,7 +632,7 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div className="space-y-3 max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#00f2aa]/10 border border-[#00f2aa]/25 px-3.5 py-1 text-xs font-bold text-[#00f2aa]">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#bef237]/10 border border-[#bef237]/25 px-3.5 py-1 text-xs font-bold text-[#bef237]">
               <Sparkles className="w-3.5 h-3.5 animate-pulse" />
               <span>Full Ahmedabad Urban Mobility Grid • OpenStreetMap</span>
             </div>
@@ -647,12 +647,12 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
           </div>
 
           {/* Quick Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-[#121623] rounded-2xl border border-white/10 self-start md:self-auto">
+          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-[#0f1d28] rounded-2xl border border-white/10 self-start md:self-auto">
             <button
               onClick={() => setActiveFilter('all')}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeFilter === 'all'
-                  ? 'bg-[#00f2aa] text-slate-950 font-black shadow-md shadow-[#00f2aa]/20'
+                  ? 'bg-[#bef237] text-slate-950 font-black shadow-md shadow-[#bef237]/20'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -662,7 +662,7 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
               onClick={() => setActiveFilter('hub')}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeFilter === 'hub'
-                  ? 'bg-[#00f2aa] text-slate-950 font-black shadow-md shadow-[#00f2aa]/20'
+                  ? 'bg-[#bef237] text-slate-950 font-black shadow-md shadow-[#bef237]/20'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -672,7 +672,7 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
               onClick={() => setActiveFilter('landmark')}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeFilter === 'landmark'
-                  ? 'bg-[#00f2aa] text-slate-950 font-black shadow-md shadow-[#00f2aa]/20'
+                  ? 'bg-[#bef237] text-slate-950 font-black shadow-md shadow-[#bef237]/20'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -682,7 +682,7 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
               onClick={() => setActiveFilter('locality')}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeFilter === 'locality'
-                  ? 'bg-[#00f2aa] text-slate-950 font-black shadow-md shadow-[#00f2aa]/20'
+                  ? 'bg-[#bef237] text-slate-950 font-black shadow-md shadow-[#bef237]/20'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -692,9 +692,9 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
         </div>
 
         {/* Quick Locality Jump Selector & Highway Badges Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 bg-[#0e111a] p-3 sm:px-4 rounded-2xl border border-white/10 text-xs">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 bg-[#0e1724] p-3 sm:px-4 rounded-2xl border border-white/10 text-xs">
           <div className="flex items-center gap-2 w-full sm:w-auto">
-            <Search className="w-4 h-4 text-[#00f2aa] shrink-0" />
+            <Search className="w-4 h-4 text-[#bef237] shrink-0" />
             <span className="text-slate-400 font-semibold shrink-0">Jump to Area:</span>
             <select
               value={selectedSearchVal}
@@ -702,7 +702,7 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
                 const node = AHMEDABAD_MAP_NODES.find((n) => n.id === e.target.value);
                 if (node) handleFocusLocation(node);
               }}
-              className="bg-[#141824] text-white border border-white/10 rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:border-[#00f2aa] cursor-pointer w-full sm:w-64"
+              className="bg-[#0f1d28] text-white border border-white/10 rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:border-[#bef237] cursor-pointer w-full sm:w-64"
             >
               <option value="">Select Ahmedabad Location...</option>
               {AHMEDABAD_MAP_NODES.map((n) => (
@@ -715,7 +715,7 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
 
           <div className="hidden lg:flex items-center gap-4 text-[11px] text-slate-400">
             <div className="flex items-center gap-1.5">
-              <span className="w-3 h-1 bg-[#00f2aa] rounded-full"></span>
+              <span className="w-3 h-1 bg-[#bef237] rounded-full"></span>
               <span>S.G. Highway (NH 147)</span>
             </div>
             <div className="flex items-center gap-1.5">
@@ -749,21 +749,21 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
             <div className="absolute top-6 right-6 z-20 flex flex-col gap-2">
               <button
                 onClick={handleZoomIn}
-                className="w-9 h-9 rounded-xl bg-[#0e111a]/90 backdrop-blur-md border border-white/15 text-white hover:bg-[#00f2aa] hover:text-slate-950 flex items-center justify-center font-bold text-lg shadow-lg transition-all cursor-pointer"
+                className="w-9 h-9 rounded-xl bg-[#0e1724]/90 backdrop-blur-md border border-white/15 text-white hover:bg-[#bef237] hover:text-slate-950 flex items-center justify-center font-bold text-lg shadow-lg transition-all cursor-pointer"
                 title="Zoom in"
               >
                 +
               </button>
               <button
                 onClick={handleZoomOut}
-                className="w-9 h-9 rounded-xl bg-[#0e111a]/90 backdrop-blur-md border border-white/15 text-white hover:bg-[#00f2aa] hover:text-slate-950 flex items-center justify-center font-bold text-lg shadow-lg transition-all cursor-pointer"
+                className="w-9 h-9 rounded-xl bg-[#0e1724]/90 backdrop-blur-md border border-white/15 text-white hover:bg-[#bef237] hover:text-slate-950 flex items-center justify-center font-bold text-lg shadow-lg transition-all cursor-pointer"
                 title="Zoom out"
               >
                 −
               </button>
               <button
                 onClick={handleResetAhmedabadBounds}
-                className="w-9 h-9 rounded-xl bg-[#0e111a]/90 backdrop-blur-md border border-white/15 text-white hover:bg-[#00f2aa] hover:text-slate-950 flex items-center justify-center shadow-lg transition-all cursor-pointer"
+                className="w-9 h-9 rounded-xl bg-[#0e1724]/90 backdrop-blur-md border border-white/15 text-white hover:bg-[#bef237] hover:text-slate-950 flex items-center justify-center shadow-lg transition-all cursor-pointer"
                 title="Reset to Full Ahmedabad Extent"
               >
                 <RotateCcw className="w-4 h-4" />
@@ -772,8 +772,8 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
 
             {/* OpenStreetMap Attribution & Status Badge */}
             <div className="absolute bottom-6 left-6 z-20 pointer-events-none">
-              <div className="rounded-xl bg-[#07080c]/85 backdrop-blur-md border border-white/10 px-3 py-1.5 text-[10px] text-slate-400 flex items-center gap-2 shadow-lg">
-                <span className="w-2 h-2 rounded-full bg-[#00f2aa] animate-pulse"></span>
+              <div className="rounded-xl bg-[#080c14]/85 backdrop-blur-md border border-white/10 px-3 py-1.5 text-[10px] text-slate-400 flex items-center gap-2 shadow-lg">
+                <span className="w-2 h-2 rounded-full bg-[#bef237] animate-pulse"></span>
                 <span>OpenStreetMap • Ahmedabad AUDA Extent</span>
               </div>
             </div>
@@ -781,13 +781,13 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
 
           {/* Right Column: Zone Telemetry HUD Card (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="bg-[#0e111a] border border-white/10 p-6 rounded-3xl shadow-xl space-y-5 relative overflow-hidden">
+            <div className="bg-[#0e1724] border border-white/10 p-6 rounded-3xl shadow-xl space-y-5 relative overflow-hidden">
               
               {/* Subtle card glow */}
-              <div className="absolute top-0 right-0 w-36 h-36 bg-[#00f2aa]/10 rounded-full blur-2xl pointer-events-none" />
+              <div className="absolute top-0 right-0 w-36 h-36 bg-[#bef237]/10 rounded-full blur-2xl pointer-events-none" />
 
               <div className="flex items-center justify-between pb-3 border-b border-white/5 relative z-10">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[#00f2aa] font-bold">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#bef237] font-bold">
                   ZONE TELEMETRY
                 </span>
                 <span className="text-[10px] font-bold text-slate-300 bg-white/5 px-2.5 py-1 rounded-lg border border-white/10">
@@ -799,7 +799,7 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
                 <div className="flex items-center gap-2 mb-1">
                   <span
                     className={`w-2.5 h-2.5 rounded-full ${
-                      activeNode.type === 'hub' ? 'bg-[#00f2aa]' : activeNode.type === 'landmark' ? 'bg-[#38bdf8]' : 'bg-slate-400'
+                      activeNode.type === 'hub' ? 'bg-[#bef237]' : activeNode.type === 'landmark' ? 'bg-[#38bdf8]' : 'bg-slate-400'
                     }`}
                   ></span>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
@@ -815,23 +815,23 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
               </div>
 
               {/* Real Inventory Status Indicator */}
-              <div className="p-4 rounded-2xl bg-[#141824] border border-white/5 space-y-2 relative z-10">
+              <div className="p-4 rounded-2xl bg-[#0f1d28] border border-white/5 space-y-2 relative z-10">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-slate-400 font-semibold">Fleet Availability:</span>
-                  <span className="font-bold text-[#00f2aa] font-mono">
+                  <span className="font-bold text-[#bef237] font-mono">
                     {availableVehiclesCount > 0 ? `${availableVehiclesCount} Available` : 'Fleet Arriving'}
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-400 leading-relaxed">
                   {availableVehiclesCount > 0
-                    ? `${availableVehiclesCount} verified self-drive cars and bikes are ready for instant reservation at this hub.`
-                    : 'Adding real fleet vehicles in this Ahmedabad sector shortly. Rentro cars and bikes can be booked from any nearby hub with free city handover.'}
+                    ? `${availableVehiclesCount} verified self-drive vehicles across bikes, scooters, cars and EVs are ready for instant reservation at this hub.`
+                    : 'Adding real fleet inventory in this Ahmedabad sector shortly. Rentro vehicles can be booked from any nearby hub with free city handover.'}
                 </p>
               </div>
 
               {/* Highlight Note */}
               <div className="flex items-start gap-2.5 text-xs text-slate-300 relative z-10">
-                <Compass className="w-4 h-4 text-[#00f2aa] shrink-0 mt-0.5" />
+                <Compass className="w-4 h-4 text-[#bef237] shrink-0 mt-0.5" />
                 <span className="leading-relaxed">{activeNode.highlight}</span>
               </div>
 
@@ -840,7 +840,7 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
                 <Button
                   size="lg"
                   onClick={() => handleHubSelect(activeNode)}
-                  className="w-full font-bold text-xs bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 shadow-lg shadow-[#00f2aa]/20 gap-2 py-3"
+                  className="w-full font-bold text-xs bg-[#bef237] hover:bg-[#a3e635] text-slate-950 shadow-lg shadow-[#bef237]/20 gap-2 py-3"
                 >
                   <span>{activeNode.hubId ? `Select ${activeNode.name} Hub` : `Explore Vehicles in ${activeNode.name}`}</span>
                   <ArrowRight className="w-4 h-4" />
@@ -849,7 +849,7 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
             </div>
 
             {/* Quick Area Filter Chips */}
-            <div className="bg-[#0e111a] border border-white/5 p-4 rounded-2xl">
+            <div className="bg-[#0e1724] border border-white/5 p-4 rounded-2xl">
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2.5">
                 Popular Ahmedabad Localities
               </span>
@@ -860,7 +860,7 @@ export const AhmedabadFuturisticMap: React.FC<AhmedabadFuturisticMapProps> = ({
                     onClick={() => handleFocusLocation(node)}
                     className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all cursor-pointer ${
                       activeNodeId === node.id
-                        ? 'bg-[#00f2aa] text-slate-950 font-bold shadow-sm'
+                        ? 'bg-[#bef237] text-slate-950 font-bold shadow-sm'
                         : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
                     }`}
                   >

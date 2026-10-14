@@ -1,7 +1,8 @@
 import React from 'react';
 
-interface LogoProps {
-  size?: 'sm' | 'md' | 'lg';
+export interface LogoProps {
+  variant?: 'light' | 'dark' | 'lime' | 'badge';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   showSubtitle?: boolean;
   subtitle?: string;
   onClick?: () => void;
@@ -9,62 +10,90 @@ interface LogoProps {
 }
 
 export const Logo: React.FC<LogoProps> = ({
+  variant = 'light',
   size = 'md',
   showSubtitle = true,
-  subtitle = 'Ahmedabad • Self-Drive',
+  subtitle = 'Vadodara • Ahmedabad',
   onClick,
   className = '',
 }) => {
-  const sizeClasses = {
-    sm: {
-      box: 'w-8 h-8 rounded-xl',
-      r: 'text-base',
-      dot: 'w-1.5 h-1.5',
-      title: 'text-lg',
-      sub: 'text-[9px]',
-      gap: 'gap-2',
-    },
-    md: {
-      box: 'w-10 h-10 rounded-2xl',
-      r: 'text-xl',
-      dot: 'w-2 h-2',
-      title: 'text-xl',
-      sub: 'text-[10px]',
-      gap: 'gap-2.5',
-    },
-    lg: {
-      box: 'w-12 h-12 rounded-2xl',
-      r: 'text-2xl',
-      dot: 'w-2.5 h-2.5',
-      title: 'text-2xl',
-      sub: 'text-xs',
-      gap: 'gap-3',
-    },
+  // Height classes for responsive sizing while preserving 403:100 aspect ratio
+  const heightClasses = {
+    sm: 'h-6',
+    md: 'h-8',
+    lg: 'h-10 sm:h-11',
+    xl: 'h-12 sm:h-16',
   }[size];
 
-  const content = (
-    <div className={`flex items-center ${sizeClasses.gap} group select-none ${className}`}>
-      {/* Sleek metallic squircle badge with pulse dot */}
-      <div
-        className={`${sizeClasses.box} bg-gradient-to-br from-[#111624] to-[#0a0d14] border border-white/15 flex items-center justify-center text-white shadow-md group-hover:border-[#00f2aa]/50 transition-all shrink-0`}
-      >
-        <span className={`font-black ${sizeClasses.r} tracking-tight flex items-center leading-none`}>
-          R
-          <span className={`${sizeClasses.dot} rounded-full bg-[#00f2aa] inline-block ml-0.5 animate-pulse`}></span>
-        </span>
-      </div>
+  const subtitleClasses = {
+    sm: 'text-[9px] tracking-[0.2em] mt-1',
+    md: 'text-[10px] tracking-[0.25em] mt-1.5',
+    lg: 'text-xs tracking-[0.28em] mt-2',
+    xl: 'text-xs sm:text-sm tracking-[0.3em] mt-2.5',
+  }[size];
 
-      {/* Brand typography */}
-      <div className="text-left">
-        <span className={`${sizeClasses.title} font-black tracking-tight text-white block leading-tight`}>
-          RENTRO
-        </span>
+  // Which logo SVG asset to display
+  const logoSrc = {
+    light: '/rentro-logo-white.svg',
+    dark: '/rentro-logo-black.svg',
+    lime: '/rentro-logo-lime.svg',
+    badge: '/rentro-logo-black.svg',
+  }[variant];
+
+  // If badge variant is chosen, render the white squircle card featured on PDF Page 1 & 10
+  if (variant === 'badge') {
+    const badgeContent = (
+      <div className={`inline-flex flex-col items-center select-none ${className}`}>
+        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black/40 border border-slate-200/80 flex items-center justify-center transition-transform hover:scale-[1.02]">
+          <img
+            src="/rentro-logo-black.svg"
+            alt="RENTRO"
+            className={`${heightClasses} w-auto object-contain`}
+            loading="eager"
+          />
+        </div>
         {showSubtitle && (
-          <span className={`${sizeClasses.sub} font-bold text-[#00f2aa] tracking-widest uppercase block leading-tight`}>
+          <span className={`font-black uppercase text-[#bef237] ${subtitleClasses} text-center font-mono`}>
             {subtitle}
           </span>
         )}
       </div>
+    );
+
+    if (onClick) {
+      return (
+        <button
+          type="button"
+          onClick={onClick}
+          className="cursor-pointer focus:outline-none transition-opacity hover:opacity-95"
+          aria-label="Rentro Home"
+        >
+          {badgeContent}
+        </button>
+      );
+    }
+    return badgeContent;
+  }
+
+  // Standard inline brand logo
+  const inlineContent = (
+    <div className={`inline-flex flex-col select-none group ${className}`}>
+      <div className="flex items-center">
+        <img
+          src={logoSrc}
+          alt="RENTRO"
+          className={`${heightClasses} w-auto object-contain transition-transform group-hover:scale-[1.01]`}
+          loading="eager"
+        />
+      </div>
+
+      {showSubtitle && (
+        <span
+          className={`font-bold uppercase text-[#bef237] font-mono leading-none ${subtitleClasses} group-hover:text-white transition-colors`}
+        >
+          {subtitle}
+        </span>
+      )}
     </div>
   );
 
@@ -74,13 +103,14 @@ export const Logo: React.FC<LogoProps> = ({
         type="button"
         onClick={onClick}
         className="cursor-pointer focus:outline-none text-left"
+        aria-label="Rentro Home"
       >
-        {content}
+        {inlineContent}
       </button>
     );
   }
 
-  return content;
+  return inlineContent;
 };
 
 export default Logo;

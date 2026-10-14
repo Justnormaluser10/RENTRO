@@ -30,18 +30,18 @@ export const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#090b12] border-b border-white/5 relative">
+    <section className="py-24 bg-[#080c14] border-b border-white/5 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-bold text-[#00f2aa] uppercase tracking-wider block">
+          <span className="text-xs font-bold text-[#bef237] uppercase tracking-wider block">
             Seamless Self-Drive Mobility
           </span>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
             How It Works
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto">
-            Zero endless dealership paperwork or hidden security deductions. Four straightforward steps to get you on Ahmedabad roads.
+            Zero endless dealership paperwork or hidden security deductions. Four straightforward steps to get you on Vadodara & Ahmedabad roads.
           </p>
         </div>
 
@@ -51,14 +51,14 @@ export const HowItWorks: React.FC = () => {
             return (
               <div
                 key={index}
-                className="relative rounded-3xl bg-[#111420] border border-white/10 p-7 flex flex-col justify-between hover:border-[#00f2aa]/40 transition-all duration-300 group"
+                className="relative rounded-3xl bg-[#0e1724] border border-white/10 p-7 flex flex-col justify-between hover:border-[#bef237]/40 transition-all duration-300 group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-8">
-                    <span className="text-4xl font-black text-[#00f2aa]/40 font-mono group-hover:text-[#00f2aa] transition-colors">
+                    <span className="text-4xl font-black text-[#bef237]/40 font-mono group-hover:text-[#bef237] transition-colors">
                       {step.number}
                     </span>
-                    <div className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 text-[#00f2aa] flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 text-[#bef237] flex items-center justify-center group-hover:scale-110 transition-transform">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>

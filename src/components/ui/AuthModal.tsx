@@ -80,10 +80,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-      <div className="relative w-full max-w-md bg-[#0e111a] border border-white/10 rounded-3xl shadow-2xl p-6 sm:p-8 space-y-5 overflow-hidden">
+      <div className="relative w-full max-w-md bg-[#0e1724] border border-white/10 rounded-3xl shadow-2xl p-6 sm:p-8 space-y-5 overflow-hidden">
         
         {/* Background glow */}
-        <div className="absolute top-0 right-0 w-48 h-48 bg-[#00f2aa]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-48 h-48 bg-[#bef237]/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Close Button */}
         <button
@@ -104,7 +104,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </h2>
           <p className="text-xs text-slate-400 max-w-xs mx-auto">
             {vehicleName ? (
-              <span>Reserving <strong className="text-[#00f2aa]">{vehicleName}</strong> in Ahmedabad</span>
+              <span>Reserving <strong className="text-[#bef237]">{vehicleName}</strong></span>
             ) : (
               'Quick login to complete your self-drive vehicle reservation.'
             )}
@@ -112,13 +112,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         </div>
 
         {/* Mode Tabs */}
-        <div className="grid grid-cols-2 gap-1 p-1 bg-[#141824] rounded-2xl border border-white/5 text-xs font-bold">
+        <div className="grid grid-cols-2 gap-1 p-1 bg-[#142330] rounded-2xl border border-white/5 text-xs font-bold">
           <button
             type="button"
             onClick={() => { setMode('signin'); setError(null); }}
             className={`py-2 rounded-xl transition-all cursor-pointer text-center ${
               mode === 'signin'
-                ? 'bg-[#00f2aa] text-slate-950 font-black shadow-md'
+                ? 'bg-[#bef237] text-slate-950 font-black shadow-md'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -129,7 +129,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             onClick={() => { setMode('signup'); setError(null); }}
             className={`py-2 rounded-xl transition-all cursor-pointer text-center ${
               mode === 'signup'
-                ? 'bg-[#00f2aa] text-slate-950 font-black shadow-md'
+                ? 'bg-[#bef237] text-slate-950 font-black shadow-md'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -169,7 +169,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3.5 px-4 rounded-xl font-black text-sm bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 shadow-lg shadow-[#00f2aa]/20 transition-all cursor-pointer disabled:opacity-50 mt-1"
+              className="w-full py-3.5 px-4 rounded-xl font-black text-sm bg-[#bef237] hover:bg-[#a3e635] text-slate-950 shadow-lg shadow-[#bef237]/20 transition-all cursor-pointer disabled:opacity-50 mt-1"
             >
               {isLoading ? 'Signing In...' : 'Sign In & Continue Booking'}
             </button>
@@ -215,7 +215,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3.5 px-4 rounded-xl font-black text-sm bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 shadow-lg shadow-[#00f2aa]/20 transition-all cursor-pointer disabled:opacity-50 mt-2"
+              className="w-full py-3.5 px-4 rounded-xl font-black text-sm bg-[#bef237] hover:bg-[#a3e635] text-slate-950 shadow-lg shadow-[#bef237]/20 transition-all cursor-pointer disabled:opacity-50 mt-2"
             >
               {isLoading ? 'Creating Account...' : 'Create Account & Continue'}
             </button>
@@ -224,7 +224,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
         {/* Security badge */}
         <div className="pt-2 text-center text-[11px] text-slate-500 border-t border-white/5 flex items-center justify-center gap-1.5">
-          <ShieldCheck className="w-3.5 h-3.5 text-[#00f2aa]" />
+          <ShieldCheck className="w-3.5 h-3.5 text-[#bef237]" />
           <span>Your session stays securely logged in on this browser.</span>
         </div>
       </div>

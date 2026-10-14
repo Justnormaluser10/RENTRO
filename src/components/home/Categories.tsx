@@ -46,18 +46,18 @@ export const Categories: React.FC<CategoriesProps> = ({ onSelectCategory }) => {
   ];
 
   return (
-    <section className="py-24 bg-[#07080c] border-b border-white/5">
+    <section className="py-24 bg-[#080c14] border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-          <span className="text-xs font-bold text-[#00f2aa] uppercase tracking-wider block">
-            Diverse Ahmedabad Fleet
+          <span className="text-xs font-bold text-[#bef237] uppercase tracking-wider block">
+            Diverse Gujarat Fleet
           </span>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
             Browse By Category
           </h2>
           <p className="text-xs sm:text-sm text-slate-400">
-            Pick the perfect self-drive vehicle for city meetings on S.G. Highway, weekend trips to Thol Lake, or daily commuting.
+            Pick the perfect self-drive vehicle for city meetings on S.G. Highway, weekend trips to Statue of Unity, or daily commuting across Vadodara & Ahmedabad.
           </p>
         </div>
 
@@ -66,24 +66,24 @@ export const Categories: React.FC<CategoriesProps> = ({ onSelectCategory }) => {
             <button
               key={idx}
               onClick={() => onSelectCategory(cat.type, cat.category, cat.fuel)}
-              className="group relative rounded-3xl overflow-hidden aspect-4/3 sm:aspect-3/4 border border-white/10 text-left focus:outline-none focus:ring-2 focus:ring-[#00f2aa] transition-all duration-300 hover:border-[#00f2aa]/50 hover:shadow-2xl hover:shadow-[#00f2aa]/5 hover:-translate-y-1 cursor-pointer bg-[#0e111a]"
+              className="group relative rounded-3xl overflow-hidden aspect-4/3 sm:aspect-3/4 border border-white/10 text-left focus:outline-none focus:ring-2 focus:ring-[#bef237] transition-all duration-300 hover:border-[#bef237]/50 hover:shadow-2xl hover:shadow-[#bef237]/5 hover:-translate-y-1 cursor-pointer bg-[#0e1724]"
             >
               <img
                 src={cat.image}
                 alt={cat.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#07080c] via-[#07080c]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080c14] via-[#080c14]/40 to-transparent" />
 
-              <div className="absolute top-4 right-4 rounded-full bg-black/60 backdrop-blur-md p-2.5 text-white group-hover:bg-[#00f2aa] group-hover:text-slate-950 transition-colors">
+              <div className="absolute top-4 right-4 rounded-full bg-black/60 backdrop-blur-md p-2.5 text-white group-hover:bg-[#bef237] group-hover:text-slate-950 transition-colors">
                 <ArrowUpRight className="w-4 h-4" />
               </div>
 
               <div className="absolute bottom-5 left-5 right-5 text-white space-y-1">
-                <span className="inline-block text-[10px] font-bold text-[#00f2aa] bg-black/70 border border-[#00f2aa]/30 px-2.5 py-0.5 rounded-full mb-1">
+                <span className="inline-block text-[10px] font-bold text-[#bef237] bg-black/70 border border-[#bef237]/30 px-2.5 py-0.5 rounded-full mb-1">
                   {cat.tag}
                 </span>
-                <h3 className="text-lg font-black text-white group-hover:text-[#00f2aa] transition-colors leading-tight">
+                <h3 className="text-lg font-black text-white group-hover:text-[#bef237] transition-colors leading-tight">
                   {cat.title}
                 </h3>
                 <p className="text-xs text-slate-400">{cat.subtitle}</p>

@@ -22,7 +22,7 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
   const isAvailable = vehicle.status === 'AVAILABLE';
 
   return (
-    <div className="group rounded-3xl bg-[#0e111a] border border-white/10 shadow-lg hover:border-[#00f2aa]/40 hover:shadow-2xl hover:shadow-[#00f2aa]/5 transition-all duration-300 flex flex-col overflow-hidden">
+    <div className="group rounded-3xl bg-[#0e1724] border border-white/10 shadow-lg hover:border-[#bef237]/40 hover:shadow-2xl hover:shadow-[#bef237]/5 transition-all duration-300 flex flex-col overflow-hidden">
       {/* Image Header with Badges */}
       <div className="relative aspect-16/10 w-full overflow-hidden bg-slate-950">
         <img
@@ -31,7 +31,7 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e111a] via-transparent to-transparent opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0e1724] via-transparent to-transparent opacity-60" />
 
         <div className="absolute top-3 left-3 flex items-center gap-1.5">
           <Badge variant={isAvailable ? 'success' : 'danger'} size="sm">
@@ -55,10 +55,10 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
           {/* Brand & Model */}
           <div className="flex items-start justify-between gap-2 mb-1.5">
             <div>
-              <span className="text-xs font-bold text-[#00f2aa] uppercase tracking-wider block">
+              <span className="text-xs font-bold text-[#bef237] uppercase tracking-wider block">
                 {vehicle.brand}
               </span>
-              <h3 className="text-lg font-black text-white group-hover:text-[#00f2aa] transition-colors line-clamp-1">
+              <h3 className="text-lg font-black text-white group-hover:text-[#bef237] transition-colors line-clamp-1">
                 {vehicle.model}
               </h3>
             </div>
@@ -70,7 +70,7 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
           {/* Location */}
           {vehicle.location && (
             <div className="flex items-center gap-1.5 text-xs text-slate-400 mb-4">
-              <MapPin className="w-3.5 h-3.5 text-[#00f2aa] shrink-0" />
+              <MapPin className="w-3.5 h-3.5 text-[#bef237] shrink-0" />
               <span className="truncate">{vehicle.location.name}</span>
             </div>
           )}
@@ -102,14 +102,14 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
               </span>
               <span className="text-xs text-slate-400 font-medium">/day</span>
             </div>
-            <span className="text-[11px] text-[#00f2aa] font-bold block">
+            <span className="text-[11px] text-[#bef237] font-bold block">
               ₹{vehicle.pricing.hourly_rate}/hr
             </span>
           </div>
 
           <button
             onClick={() => onSelect(vehicle)}
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 font-black text-xs shadow-md shadow-[#00f2aa]/20 transition-all cursor-pointer group-hover:gap-2"
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#bef237] hover:bg-[#a3e635] text-slate-950 font-black text-xs shadow-md shadow-[#bef237]/20 transition-all cursor-pointer group-hover:gap-2"
           >
             <span>View Details</span>
             <ArrowRight className="w-3.5 h-3.5" />

@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useBooking } from '../../context/BookingContext';
 import { adminAuth } from '../../services/adminAuth';
+import { VehicleCategoryFilter } from '../../types';
 import { Button } from '../ui/Button';
 import { Logo } from '../ui/Logo';
 import { 
   Car, 
   Bike, 
+  Zap,
   Menu, 
   X, 
   User, 
@@ -36,17 +38,18 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
     navigate(path);
   };
 
-  const handleFilterNav = (type: 'car' | 'bike') => {
-    updateSearch({ vehicleType: type });
+  const handleFilterNav = (category: VehicleCategoryFilter) => {
+    updateSearch({ vehicleType: category });
     setMobileMenuOpen(false);
     navigate('/vehicles');
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#07080c]/85 backdrop-blur-xl border-b border-white/10 shadow-lg">
+    <header className="sticky top-0 z-40 w-full bg-[#080c14]/90 backdrop-blur-xl border-b border-white/10 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Brand Logo - Unified component */}
+          
+          {/* Brand Logo - Official Component */}
           <div className="flex items-center gap-8">
             <Logo onClick={() => handleNavClick('/')} />
 
@@ -55,31 +58,46 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
               <button
                 onClick={() => handleNavClick('/')}
                 className={`px-3.5 py-2 text-xs font-bold rounded-xl transition-colors cursor-pointer ${
-                  currentPath === '/' ? 'text-[#00f2aa] bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5'
+                  currentPath === '/' ? 'text-[#bef237] bg-white/5 font-black' : 'text-slate-400 hover:text-white hover:bg-white/5'
                 }`}
               >
                 Home
               </button>
-              <button
-                onClick={() => handleFilterNav('car')}
-                className={`flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl transition-colors cursor-pointer ${
-                  currentPath === '/vehicles' ? 'text-[#00f2aa]' : 'text-slate-400 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                <Car className="w-3.5 h-3.5 text-[#00f2aa]" />
-                Cars
-              </button>
+              
+              {/* 4 Official Vehicle Categories */}
               <button
                 onClick={() => handleFilterNav('bike')}
-                className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
               >
-                <Bike className="w-3.5 h-3.5 text-[#00f2aa]" />
+                <Bike className="w-3.5 h-3.5 text-[#bef237]" />
                 Bikes
               </button>
               <button
+                onClick={() => handleFilterNav('scooter')}
+                className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
+              >
+                <span className="text-sm">🛵</span>
+                Scooters
+              </button>
+              <button
+                onClick={() => handleFilterNav('car')}
+                className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
+              >
+                <Car className="w-3.5 h-3.5 text-[#bef237]" />
+                Cars
+              </button>
+              <button
+                onClick={() => handleFilterNav('ev')}
+                className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
+              >
+                <Zap className="w-3.5 h-3.5 fill-[#bef237] text-[#bef237]" />
+                EVs
+              </button>
+
+              <button
                 onClick={() => handleNavClick('/how-it-works')}
                 className={`px-3.5 py-2 text-xs font-bold rounded-xl transition-colors cursor-pointer ${
-                  currentPath === '/how-it-works' ? 'text-[#00f2aa] bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5'
+                  currentPath === '/how-it-works' ? 'text-[#bef237] bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5'
                 }`}
               >
                 How It Works
@@ -88,7 +106,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
                 <button
                   onClick={() => handleNavClick('/dashboard')}
                   className={`flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl transition-colors cursor-pointer ${
-                    currentPath === '/dashboard' ? 'text-[#00f2aa] bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5'
+                    currentPath === '/dashboard' ? 'text-[#bef237] bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   <CalendarDays className="w-3.5 h-3.5" />
@@ -106,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
                 variant="outline"
                 size="sm"
                 onClick={() => handleNavClick(currentPath.startsWith('/admin') ? '/' : '/admin')}
-                className="gap-1.5 bg-[#00f2aa]/10 border-[#00f2aa]/30 text-[#00f2aa] hover:bg-[#00f2aa]/20 text-xs font-bold"
+                className="gap-1.5 bg-[#bef237]/10 border-[#bef237]/30 text-[#bef237] hover:bg-[#bef237]/20 text-xs font-bold"
               >
                 <LayoutDashboard className="w-3.5 h-3.5" />
                 {currentPath.startsWith('/admin') ? 'Customer View' : 'Fleet Admin Portal'}
@@ -126,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
                       className="w-7 h-7 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="w-7 h-7 rounded-full bg-[#00f2aa]/15 border border-[#00f2aa]/30 flex items-center justify-center text-[#00f2aa] font-black text-xs">
+                    <div className="w-7 h-7 rounded-full bg-[#bef237]/15 border border-[#bef237]/30 flex items-center justify-center text-[#bef237] font-black text-xs">
                       {user?.full_name ? user.full_name.charAt(0).toUpperCase() : user?.email ? user.email.charAt(0).toUpperCase() : 'U'}
                     </div>
                   )}
@@ -157,7 +175,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
                 </button>
                 <button
                   onClick={() => handleNavClick('/signup')}
-                  className="px-4 py-2 text-xs font-bold bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 rounded-xl shadow-md shadow-[#00f2aa]/20 transition-all cursor-pointer"
+                  className="px-4 py-2 text-xs font-black bg-[#bef237] hover:bg-[#a3e635] text-slate-950 rounded-xl shadow-md shadow-[#bef237]/20 transition-all cursor-pointer"
                 >
                   Sign Up
                 </button>
@@ -179,7 +197,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-white/10 bg-[#0e111a] px-4 pt-3 pb-6 space-y-4 animate-fade-in shadow-2xl">
+        <div className="md:hidden border-b border-white/10 bg-[#0e1724] px-4 pt-3 pb-6 space-y-4 animate-fade-in shadow-2xl">
           <div className="space-y-1">
             <button
               onClick={() => handleNavClick('/')}
@@ -188,18 +206,32 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
               Home
             </button>
             <button
-              onClick={() => handleFilterNav('car')}
-              className="w-full flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-lg hover:bg-white/5 text-slate-200"
-            >
-              <Car className="w-4 h-4 text-[#00f2aa]" />
-              Cars
-            </button>
-            <button
               onClick={() => handleFilterNav('bike')}
               className="w-full flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-lg hover:bg-white/5 text-slate-200"
             >
-              <Bike className="w-4 h-4 text-[#00f2aa]" />
+              <Bike className="w-4 h-4 text-[#bef237]" />
               Bikes
+            </button>
+            <button
+              onClick={() => handleFilterNav('scooter')}
+              className="w-full flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-lg hover:bg-white/5 text-slate-200"
+            >
+              <span className="text-base">🛵</span>
+              Scooters
+            </button>
+            <button
+              onClick={() => handleFilterNav('car')}
+              className="w-full flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-lg hover:bg-white/5 text-slate-200"
+            >
+              <Car className="w-4 h-4 text-[#bef237]" />
+              Cars
+            </button>
+            <button
+              onClick={() => handleFilterNav('ev')}
+              className="w-full flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-lg hover:bg-white/5 text-slate-200"
+            >
+              <Zap className="w-4 h-4 fill-[#bef237] text-[#bef237]" />
+              EVs
             </button>
             <button
               onClick={() => handleNavClick('/how-it-works')}
@@ -212,16 +244,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
                 onClick={() => handleNavClick('/dashboard')}
                 className="w-full flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-lg hover:bg-white/5 text-slate-200"
               >
-                <CalendarDays className="w-4 h-4 text-[#00f2aa]" />
+                <CalendarDays className="w-4 h-4 text-[#bef237]" />
                 My Bookings
               </button>
             )}
             {isAdminAuthenticated && (
               <button
                 onClick={() => handleNavClick('/admin')}
-                className="w-full flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-lg bg-[#00f2aa]/10 text-[#00f2aa]"
+                className="w-full flex items-center gap-2 px-3 py-2 text-sm font-semibold rounded-lg bg-[#bef237]/10 text-[#bef237]"
               >
-                <LayoutDashboard className="w-4 h-4 text-[#00f2aa]" />
+                <LayoutDashboard className="w-4 h-4 text-[#bef237]" />
                 Fleet Admin Portal
               </button>
             )}
@@ -248,7 +280,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
                 </button>
                 <button
                   onClick={() => handleNavClick('/signup')}
-                  className="py-2.5 px-3 rounded-xl bg-[#00f2aa] text-slate-950 text-xs font-bold text-center"
+                  className="py-2.5 px-3 rounded-xl bg-[#bef237] text-slate-950 text-xs font-bold text-center"
                 >
                   Sign Up
                 </button>
@@ -260,3 +292,5 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, navigate }) => {
     </header>
   );
 };
+
+export default Navbar;

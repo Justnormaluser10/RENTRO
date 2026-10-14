@@ -18,16 +18,16 @@ export const AhmedabadTrips: React.FC<AhmedabadTripsProps> = ({ onPlanTrip }) =>
     : AHMEDABAD_TRIPS.filter((t) => t.category === selectedCategory);
 
   return (
-    <section className="py-24 bg-[#090b12] border-b border-white/5 relative overflow-hidden">
+    <section className="py-24 bg-[#080c14] border-b border-white/5 relative overflow-hidden">
       {/* Subtle background blur accent */}
-      <div className="absolute top-1/3 right-10 w-96 h-96 bg-[#00f2aa]/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-96 h-96 bg-[#bef237]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#00f2aa]/10 border border-[#00f2aa]/25 px-3.5 py-1 text-xs font-bold text-[#00f2aa]">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#bef237]/10 border border-[#bef237]/25 px-3.5 py-1 text-xs font-bold text-[#bef237]">
               <Compass className="w-3.5 h-3.5" />
               <span>Self-Drive Road Trip Inspiration</span>
             </div>
@@ -42,14 +42,14 @@ export const AhmedabadTrips: React.FC<AhmedabadTripsProps> = ({ onPlanTrip }) =>
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-[#121623] rounded-2xl border border-white/10 self-start md:self-auto">
+          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-[#0f1d28] rounded-2xl border border-white/10 self-start md:self-auto">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer capitalize ${
                   selectedCategory === cat
-                    ? 'bg-[#00f2aa] text-slate-950 font-black shadow-md shadow-[#00f2aa]/20'
+                    ? 'bg-[#bef237] text-slate-950 font-black shadow-md shadow-[#bef237]/20'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
@@ -64,7 +64,7 @@ export const AhmedabadTrips: React.FC<AhmedabadTripsProps> = ({ onPlanTrip }) =>
           {filteredTrips.map((trip) => (
             <div
               key={trip.id}
-              className="group bg-[#111522] rounded-3xl border border-white/10 overflow-hidden hover:border-[#00f2aa]/40 transition-all duration-300 flex flex-col justify-between hover:shadow-2xl hover:shadow-[#00f2aa]/5 hover:-translate-y-1"
+              className="group bg-[#0e1724] rounded-3xl border border-white/10 overflow-hidden hover:border-[#bef237]/40 transition-all duration-300 flex flex-col justify-between hover:shadow-2xl hover:shadow-[#bef237]/5 hover:-translate-y-1"
             >
               {/* Image Banner */}
               <div className="relative aspect-16/10 w-full overflow-hidden bg-slate-900">
@@ -74,16 +74,16 @@ export const AhmedabadTrips: React.FC<AhmedabadTripsProps> = ({ onPlanTrip }) =>
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111522] via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0e1724] via-transparent to-transparent" />
                 
                 <div className="absolute top-3 left-3">
-                  <span className="bg-[#07080c]/80 backdrop-blur-md text-[#00f2aa] border border-[#00f2aa]/30 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                  <span className="bg-[#080c14]/80 backdrop-blur-md text-[#bef237] border border-[#bef237]/30 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider">
                     {trip.category}
                   </span>
                 </div>
 
                 <div className="absolute bottom-3 right-3 text-[11px] font-bold text-white bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-white/10 flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-[#00f2aa]" />
+                  <Clock className="w-3 h-3 text-[#bef237]" />
                   <span>{trip.driveTime}</span>
                 </div>
               </div>
@@ -92,11 +92,11 @@ export const AhmedabadTrips: React.FC<AhmedabadTripsProps> = ({ onPlanTrip }) =>
               <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                 <div className="space-y-2">
                   <div className="flex items-center gap-1 text-[11px] text-slate-400 font-medium">
-                    <MapPin className="w-3.5 h-3.5 text-[#00f2aa] shrink-0" />
+                    <MapPin className="w-3.5 h-3.5 text-[#bef237] shrink-0" />
                     <span className="truncate">{trip.area}</span>
                   </div>
 
-                  <h3 className="text-base font-black text-white group-hover:text-[#00f2aa] transition-colors leading-tight">
+                  <h3 className="text-base font-black text-white group-hover:text-[#bef237] transition-colors leading-tight">
                     {trip.name}
                   </h3>
 
@@ -113,7 +113,7 @@ export const AhmedabadTrips: React.FC<AhmedabadTripsProps> = ({ onPlanTrip }) =>
 
                   <button
                     onClick={() => onPlanTrip(trip)}
-                    className="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-[#00f2aa] text-white hover:text-slate-950 border border-white/10 hover:border-transparent font-bold text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer group-hover:bg-[#00f2aa] group-hover:text-slate-950"
+                    className="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-[#bef237] text-white hover:text-slate-950 border border-white/10 hover:border-transparent font-bold text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer group-hover:bg-[#bef237] group-hover:text-slate-950"
                   >
                     <span>Plan Your Ride</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -125,9 +125,9 @@ export const AhmedabadTrips: React.FC<AhmedabadTripsProps> = ({ onPlanTrip }) =>
         </div>
 
         {/* Bottom Local Guide Tip Bar */}
-        <div className="mt-12 p-4 rounded-2xl bg-[#111522] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div className="mt-12 p-4 rounded-2xl bg-[#0e1724] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#00f2aa] shrink-0" />
+            <Sparkles className="w-4 h-4 text-[#bef237] shrink-0" />
             <span>
               All destinations have convenient parking access. Recommended vehicles: automatic hatchbacks for Old Heritage City, or SUVs for Thol Lake and Nal Sarovar.
             </span>
@@ -137,7 +137,7 @@ export const AhmedabadTrips: React.FC<AhmedabadTripsProps> = ({ onPlanTrip }) =>
             href="https://wa.me/919876543210?text=Hi%20Rentro,%20I%20want%20to%20plan%20a%20self-drive%20trip%20in%20Ahmedabad"
             target="_blank"
             rel="noreferrer"
-            className="text-[#00f2aa] hover:underline font-bold shrink-0 whitespace-nowrap"
+            className="text-[#bef237] hover:underline font-bold shrink-0 whitespace-nowrap"
           >
             Ask for Route Advice on WhatsApp →
           </a>

@@ -37,15 +37,15 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#07080c] text-slate-100 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-[#080c14] text-slate-100 flex flex-col md:flex-row">
       {/* Sidebar Navigation */}
-      <aside className="w-full md:w-64 bg-[#0d0f17] border-b md:border-b-0 md:border-r border-white/5 p-5 flex flex-col justify-between shrink-0">
+      <aside className="w-full md:w-64 bg-[#0e1724] border-b md:border-b-0 md:border-r border-white/5 p-5 flex flex-col justify-between shrink-0">
         <div>
           {/* Admin Header */}
           <div className="flex items-center justify-between pb-6 border-b border-white/5 mb-6">
-            <Logo size="sm" subtitle="Ahmedabad Fleet" onClick={onExitAdmin} />
-            <span className="bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded-full">
-              Live Hub
+            <Logo size="sm" subtitle="Fleet Portal" onClick={onExitAdmin} />
+            <span className="bg-white/5 border border-white/10 text-[#bef237] text-[10px] font-mono font-bold px-2 py-0.5 rounded-full">
+              Vadodara + Ahmd
             </span>
           </div>
 
@@ -143,7 +143,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
       </aside>
 
       {/* Main Admin Content View */}
-      <main className="flex-1 p-6 md:p-10 overflow-y-auto bg-[#07080c]">
+      <main className="flex-1 p-6 md:p-10 overflow-y-auto bg-[#080c14]">
         {children}
       </main>
     </div>

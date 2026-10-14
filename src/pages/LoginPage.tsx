@@ -35,8 +35,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess, onNavigateSignU
   };
 
   return (
-    <div className="min-h-screen bg-[#07080c] text-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-7 bg-[#0e111a] p-8 rounded-3xl border border-white/10 shadow-2xl">
+    <div className="min-h-screen bg-[#080c14] text-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-7 bg-[#0e1724] p-8 rounded-3xl border border-white/10 shadow-2xl">
         
         {/* Header with Unified Brand Logo */}
         <div className="text-center space-y-3">
@@ -47,7 +47,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess, onNavigateSignU
             Welcome Back
           </h2>
           <p className="text-xs text-slate-400">
-            Sign in to manage your self-drive bookings and vehicle pickups in Ahmedabad.
+            Sign in to manage your self-drive bookings and vehicle pickups in Vadodara & Ahmedabad.
           </p>
         </div>
 
@@ -80,7 +80,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess, onNavigateSignU
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 px-4 rounded-xl font-black text-sm bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 shadow-lg shadow-[#00f2aa]/20 transition-all cursor-pointer disabled:opacity-50"
+            className="w-full py-3 px-4 rounded-xl font-black text-sm bg-[#bef237] hover:bg-[#a3e635] text-slate-950 shadow-lg shadow-[#bef237]/20 transition-all cursor-pointer disabled:opacity-50"
           >
             {isLoading ? 'Signing In...' : 'Sign In'}
           </button>
@@ -91,7 +91,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onSuccess, onNavigateSignU
             Don't have an account yet?{' '}
             <button
               onClick={onNavigateSignUp}
-              className="font-bold text-[#00f2aa] hover:underline cursor-pointer"
+              className="font-bold text-[#bef237] hover:underline cursor-pointer"
             >
               Create an Account
             </button>

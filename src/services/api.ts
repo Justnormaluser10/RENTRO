@@ -73,14 +73,28 @@ export const apiService = {
         console.warn('Supabase getLocations error, falling back to local:', err);
       }
     }
-    return getLocalData<Location[]>(STORAGE_KEYS.LOCATIONS, INITIAL_LOCATIONS);
+    const currentLocs = getLocalData<Location[]>(STORAGE_KEYS.LOCATIONS, INITIAL_LOCATIONS);
+    // Ensure newly configured initial locations (including Vadodara pilot hubs) exist
+    const merged = [...currentLocs];
+    let changed = false;
+    for (const initLoc of INITIAL_LOCATIONS) {
+      if (!merged.some(l => l.id === initLoc.id)) {
+        merged.push(initLoc);
+        changed = true;
+      }
+    }
+    if (changed) {
+      setLocalData(STORAGE_KEYS.LOCATIONS, merged);
+    }
+    return merged;
   },
 
   // -------------------------------------------------------------
   // VEHICLES
   // -------------------------------------------------------------
   async getVehicles(filter?: {
-    type?: 'all' | 'car' | 'bike';
+    type?: 'all' | 'car' | 'bike' | 'scooter' | 'ev';
+    city?: string;
     locationId?: string;
     searchQuery?: string;
     fuel?: string;
@@ -102,7 +116,13 @@ export const apiService = {
           `);
 
         if (filter?.type && filter.type !== 'all') {
-          query = query.eq('type', filter.type);
+          if (filter.type === 'ev') {
+            query = query.eq('fuel', 'electric');
+          } else if (filter.type === 'scooter') {
+            query = query.or('type.eq.scooter,category.eq.scooter');
+          } else {
+            query = query.eq('type', filter.type);
+          }
         }
         if (filter?.locationId) {
           query = query.eq('location_id', filter.locationId);
@@ -128,9 +148,20 @@ export const apiService = {
       location: locations.find(l => l.id === v.location_id) || locations[0],
     }));
 
-    // Filter by type
+    // Filter by type / EV propulsion category
     if (filter?.type && filter.type !== 'all') {
-      vehicles = vehicles.filter(v => v.type === filter.type);
+      if (filter.type === 'ev') {
+        vehicles = vehicles.filter(v => v.fuel === 'electric');
+      } else if (filter.type === 'scooter') {
+        vehicles = vehicles.filter(v => v.type === 'scooter' || v.category === 'scooter');
+      } else {
+        vehicles = vehicles.filter(v => v.type === filter.type);
+      }
+    }
+
+    // Filter by launch city
+    if (filter?.city && filter.city !== 'all') {
+      vehicles = vehicles.filter(v => v.location?.city.toLowerCase() === filter.city?.toLowerCase());
     }
 
     // Filter by location

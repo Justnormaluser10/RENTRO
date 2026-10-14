@@ -26,7 +26,8 @@ export const AdminVehiclesPage: React.FC = () => {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [locations, setLocations] = useState<Location[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [typeFilter, setTypeFilter] = useState<'all' | 'car' | 'bike'>('all');
+  const [typeFilter, setTypeFilter] = useState<'all' | 'car' | 'bike' | 'scooter' | 'ev'>('all');
+  const [cityFilter, setCityFilter] = useState<'all' | 'Ahmedabad' | 'Vadodara'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   // Modal State for Add / Edit
@@ -116,7 +117,18 @@ export const AdminVehiclesPage: React.FC = () => {
   };
 
   const filtered = vehicles.filter((v) => {
-    if (typeFilter !== 'all' && v.type !== typeFilter) return false;
+    if (typeFilter !== 'all') {
+      if (typeFilter === 'ev') {
+        if (v.fuel !== 'electric') return false;
+      } else if (typeFilter === 'scooter') {
+        if (v.type !== 'scooter' && v.category !== 'scooter') return false;
+      } else if (v.type !== typeFilter) {
+        return false;
+      }
+    }
+    if (cityFilter !== 'all') {
+      if (v.location?.city.toLowerCase() !== cityFilter.toLowerCase()) return false;
+    }
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       return (
@@ -137,45 +149,77 @@ export const AdminVehiclesPage: React.FC = () => {
             Fleet Vehicle Management
           </h1>
           <p className="text-xs text-slate-400 mt-1">
-            Add new inventory, configure hourly/daily pricing, and toggle maintenance status.
+            Add real inventory across Vadodara & Ahmedabad, configure pricing tiers, and manage fleet.
           </p>
         </div>
 
-        <Button onClick={handleOpenAdd} className="gap-2 font-bold text-xs bg-emerald-600 hover:bg-emerald-500">
-          <Plus className="w-4 h-4" />
-          <span>Add New Vehicle</span>
+        <Button onClick={handleOpenAdd} className="gap-2 font-bold text-xs bg-[#bef237] hover:bg-[#a3e635] text-slate-950">
+          <Plus className="w-4 h-4 stroke-[3]" />
+          <span>Add Real Vehicle</span>
         </Button>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-1.5 p-1 bg-slate-800 rounded-xl border border-slate-700">
-          <button
-            onClick={() => setTypeFilter('all')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              typeFilter === 'all' ? 'bg-emerald-600 text-white' : 'text-slate-400 hover:text-white'
-            }`}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Category Tabs */}
+          <div className="flex items-center gap-1 p-1 bg-slate-800 rounded-xl border border-slate-700 overflow-x-auto">
+            <button
+              onClick={() => setTypeFilter('all')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                typeFilter === 'all' ? 'bg-[#bef237] text-slate-950 font-black' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              All ({vehicles.length})
+            </button>
+            <button
+              onClick={() => setTypeFilter('bike')}
+              className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                typeFilter === 'bike' ? 'bg-[#bef237] text-slate-950 font-black' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Bike className="w-3.5 h-3.5" />
+              Bikes ({vehicles.filter(v => v.type === 'bike').length})
+            </button>
+            <button
+              onClick={() => setTypeFilter('scooter')}
+              className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                typeFilter === 'scooter' ? 'bg-[#bef237] text-slate-950 font-black' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <span>🛵</span>
+              Scooters ({vehicles.filter(v => v.type === 'scooter' || v.category === 'scooter').length})
+            </button>
+            <button
+              onClick={() => setTypeFilter('car')}
+              className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                typeFilter === 'car' ? 'bg-[#bef237] text-slate-950 font-black' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Car className="w-3.5 h-3.5" />
+              Cars ({vehicles.filter(v => v.type === 'car').length})
+            </button>
+            <button
+              onClick={() => setTypeFilter('ev')}
+              className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                typeFilter === 'ev' ? 'bg-[#bef237] text-slate-950 font-black' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <span>⚡</span>
+              EVs ({vehicles.filter(v => v.fuel === 'electric').length})
+            </button>
+          </div>
+
+          {/* City Filter */}
+          <select
+            value={cityFilter}
+            onChange={(e) => setCityFilter(e.target.value as typeof cityFilter)}
+            className="rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-xs font-semibold text-white focus:outline-none focus:border-[#bef237]"
           >
-            All ({vehicles.length})
-          </button>
-          <button
-            onClick={() => setTypeFilter('car')}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              typeFilter === 'car' ? 'bg-emerald-600 text-white' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            <Car className="w-3.5 h-3.5" />
-            Cars ({vehicles.filter(v => v.type === 'car').length})
-          </button>
-          <button
-            onClick={() => setTypeFilter('bike')}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              typeFilter === 'bike' ? 'bg-emerald-600 text-white' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            <Bike className="w-3.5 h-3.5" />
-            Bikes ({vehicles.filter(v => v.type === 'bike').length})
-          </button>
+            <option value="all">All Launch Cities</option>
+            <option value="Vadodara">Vadodara (Pilot)</option>
+            <option value="Ahmedabad">Ahmedabad (Expansion)</option>
+          </select>
         </div>
 
         <div className="w-full sm:w-72">
@@ -313,6 +357,7 @@ export const AdminVehiclesPage: React.FC = () => {
               >
                 <option value="car">Car</option>
                 <option value="bike">Bike</option>
+                <option value="scooter">Scooter</option>
               </Select>
               <Select
                 label="Category"

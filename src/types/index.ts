@@ -1,4 +1,8 @@
-export type VehicleType = 'car' | 'bike';
+export type VehicleType = 'car' | 'bike' | 'scooter';
+
+export type VehicleCategoryFilter = 'all' | 'bike' | 'scooter' | 'car' | 'ev';
+
+export type LaunchCity = 'Vadodara' | 'Ahmedabad';
 
 export type VehicleCategory = 
   | 'hatchback' 

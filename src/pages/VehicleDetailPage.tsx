@@ -102,8 +102,8 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
 
   if (isLoading || !vehicle) {
     return (
-      <div className="min-h-screen bg-[#07080c] text-white py-12 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#00f2aa]" />
+      <div className="min-h-screen bg-[#080c14] text-white py-12 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#bef237]" />
       </div>
     );
   }
@@ -113,13 +113,13 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
   ];
 
   return (
-    <div className="min-h-screen bg-[#07080c] text-white py-8 pb-32 sm:pb-16">
+    <div className="min-h-screen bg-[#080c14] text-white py-8 pb-32 sm:pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Back navigation */}
         <button
           onClick={onBack}
-          className="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-[#00f2aa] transition-colors mb-6 cursor-pointer"
+          className="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-[#bef237] transition-colors mb-6 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to all vehicles</span>
@@ -139,7 +139,7 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
                   alt={`${vehicle.brand} ${vehicle.model}`}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#07080c]/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#080c14]/60 via-transparent to-transparent" />
                 
                 <div className="absolute top-4 left-4 flex items-center gap-2">
                   <Badge variant={isAvailable ? 'success' : 'danger'}>
@@ -159,7 +159,7 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
                       key={img.id || idx}
                       onClick={() => setActiveImageIndex(idx)}
                       className={`relative w-20 h-14 rounded-2xl overflow-hidden border-2 transition-all shrink-0 cursor-pointer ${
-                        activeImageIndex === idx ? 'border-[#00f2aa] shadow-md shadow-[#00f2aa]/20' : 'border-white/10 opacity-70 hover:opacity-100'
+                        activeImageIndex === idx ? 'border-[#bef237] shadow-md shadow-[#bef237]/20' : 'border-white/10 opacity-70 hover:opacity-100'
                       }`}
                     >
                       <img src={img.image_url} alt="" className="w-full h-full object-cover" />
@@ -170,10 +170,10 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
             </div>
 
             {/* Vehicle Header & Specs */}
-            <div className="bg-[#0e111a] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl space-y-6">
+            <div className="bg-[#0e1724] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/5">
                 <div>
-                  <div className="flex items-center gap-2 text-xs font-bold text-[#00f2aa] uppercase tracking-wider mb-1">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#bef237] uppercase tracking-wider mb-1">
                     <span>{vehicle.brand}</span>
                     <span>•</span>
                     <span>{vehicle.year}</span>
@@ -194,26 +194,26 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
 
               {/* Specs Badge Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="p-4 rounded-2xl bg-[#141824] border border-white/5 text-center">
-                  <Gauge className="w-4 h-4 text-[#00f2aa] mx-auto mb-1.5" />
+                <div className="p-4 rounded-2xl bg-[#0f1d28] border border-white/5 text-center">
+                  <Gauge className="w-4 h-4 text-[#bef237] mx-auto mb-1.5" />
                   <span className="text-[10px] text-slate-400 uppercase font-bold block">Transmission</span>
                   <span className="text-xs font-bold text-white capitalize">{vehicle.transmission}</span>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[#141824] border border-white/5 text-center">
-                  <Fuel className="w-4 h-4 text-[#00f2aa] mx-auto mb-1.5" />
+                <div className="p-4 rounded-2xl bg-[#0f1d28] border border-white/5 text-center">
+                  <Fuel className="w-4 h-4 text-[#bef237] mx-auto mb-1.5" />
                   <span className="text-[10px] text-slate-400 uppercase font-bold block">Fuel</span>
                   <span className="text-xs font-bold text-white capitalize">{vehicle.fuel}</span>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[#141824] border border-white/5 text-center">
-                  <Users className="w-4 h-4 text-[#00f2aa] mx-auto mb-1.5" />
+                <div className="p-4 rounded-2xl bg-[#0f1d28] border border-white/5 text-center">
+                  <Users className="w-4 h-4 text-[#bef237] mx-auto mb-1.5" />
                   <span className="text-[10px] text-slate-400 uppercase font-bold block">Capacity</span>
                   <span className="text-xs font-bold text-white">{vehicle.seats} Seater</span>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[#141824] border border-white/5 text-center">
-                  <MapPin className="w-4 h-4 text-[#00f2aa] mx-auto mb-1.5" />
+                <div className="p-4 rounded-2xl bg-[#0f1d28] border border-white/5 text-center">
+                  <MapPin className="w-4 h-4 text-[#bef237] mx-auto mb-1.5" />
                   <span className="text-[10px] text-slate-400 uppercase font-bold block">Hub Location</span>
                   <span className="text-xs font-bold text-white truncate block">
                     {vehicle.location?.name.split(' ')[0] || 'SG Highway'}
@@ -223,7 +223,7 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
 
               {/* Description */}
               <div>
-                <h3 className="text-xs font-bold text-[#00f2aa] uppercase tracking-wider mb-2">
+                <h3 className="text-xs font-bold text-[#bef237] uppercase tracking-wider mb-2">
                   Vehicle Overview
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
@@ -234,13 +234,13 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
               {/* Features List */}
               {vehicle.features && vehicle.features.length > 0 && (
                 <div>
-                  <h3 className="text-xs font-bold text-[#00f2aa] uppercase tracking-wider mb-3">
+                  <h3 className="text-xs font-bold text-[#bef237] uppercase tracking-wider mb-3">
                     Key Equipment & Features
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {vehicle.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-200">
-                        <div className="w-4 h-4 rounded-full bg-[#00f2aa]/15 text-[#00f2aa] flex items-center justify-center shrink-0">
+                        <div className="w-4 h-4 rounded-full bg-[#bef237]/15 text-[#bef237] flex items-center justify-center shrink-0">
                           <Check className="w-2.5 h-2.5" />
                         </div>
                         <span>{feature}</span>
@@ -252,25 +252,25 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
 
               {/* Rental Rules */}
               <div className="pt-4 border-t border-white/5">
-                <h3 className="text-xs font-bold text-[#00f2aa] uppercase tracking-wider mb-3">
+                <h3 className="text-xs font-bold text-[#bef237] uppercase tracking-wider mb-3">
                   Self-Drive Requirements & Guidelines
                 </h3>
                 <ul className="space-y-2 text-xs text-slate-300">
                   <li className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#00f2aa] shrink-0 mt-0.5" />
+                    <Check className="w-3.5 h-3.5 text-[#bef237] shrink-0 mt-0.5" />
                     <span><strong>Driver Eligibility:</strong> Minimum 21 years old with valid Indian physical Driving Licence (Digilocker accepted).</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#00f2aa] shrink-0 mt-0.5" />
-                    <span><strong>Security Deposit:</strong> 100% refundable upon safe return. Inspected at Ahmedabad hub in under 2 minutes.</span>
+                    <Check className="w-3.5 h-3.5 text-[#bef237] shrink-0 mt-0.5" />
+                    <span><strong>Security Deposit:</strong> 100% refundable upon safe return. Rapid digital inspection at pickup hub.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#00f2aa] shrink-0 mt-0.5" />
+                    <Check className="w-3.5 h-3.5 text-[#bef237] shrink-0 mt-0.5" />
                     <span><strong>Fuel Policy:</strong> Same-to-same fuel level. Pick up full/logged, return at same level.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-[#00f2aa] shrink-0 mt-0.5" />
-                    <span><strong>100% Self-Drive:</strong> Zero drivers. Complete freedom to explore Ahmedabad and Gujarat on your terms.</span>
+                    <Check className="w-3.5 h-3.5 text-[#bef237] shrink-0 mt-0.5" />
+                    <span><strong>100% Self-Drive:</strong> Zero drivers. Complete freedom to explore Vadodara, Ahmedabad, and Gujarat on your terms.</span>
                   </li>
                 </ul>
               </div>
@@ -279,10 +279,10 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
 
           {/* Right Column: Pricing & Booking Widget (5 cols) */}
           <div className="lg:col-span-5 sticky top-24 space-y-6">
-            <div className="bg-[#0e111a] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl space-y-6">
+            <div className="bg-[#0e1724] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl space-y-6">
               
               <div>
-                <span className="text-xs font-bold text-[#00f2aa] uppercase tracking-wider block mb-1">
+                <span className="text-xs font-bold text-[#bef237] uppercase tracking-wider block mb-1">
                   Choose Rental Duration
                 </span>
                 
@@ -293,7 +293,7 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
                       key={preset}
                       type="button"
                       onClick={() => applyQuickDurationPreset(preset)}
-                      className="py-2.5 px-2 text-xs font-bold rounded-xl border border-white/10 bg-[#141824] text-slate-300 hover:bg-[#00f2aa] hover:text-slate-950 hover:border-transparent transition-all cursor-pointer text-center"
+                      className="py-2.5 px-2 text-xs font-bold rounded-xl border border-white/10 bg-[#0f1d28] text-slate-300 hover:bg-[#bef237] hover:text-slate-950 hover:border-transparent transition-all cursor-pointer text-center"
                     >
                       {preset === '1h' ? '1 Hour' : preset === '6h' ? '6 Hours' : preset === '1d' ? '1 Day' : preset === '2d' ? '2 Days' : preset === '3d' ? '3 Days' : '1 Week (7d)'}
                     </button>
@@ -314,13 +314,13 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
                       type="date"
                       value={searchState.pickupDate}
                       onChange={(e) => updateSearch({ pickupDate: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-white/10 bg-[#141824] text-white"
+                      className="w-full text-xs p-2.5 rounded-xl border border-white/10 bg-[#0f1d28] text-white"
                     />
                     <input
                       type="time"
                       value={searchState.pickupTime}
                       onChange={(e) => updateSearch({ pickupTime: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-white/10 bg-[#141824] text-white"
+                      className="w-full text-xs p-2.5 rounded-xl border border-white/10 bg-[#0f1d28] text-white"
                     />
                   </div>
 
@@ -330,13 +330,13 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
                       type="date"
                       value={searchState.returnDate}
                       onChange={(e) => updateSearch({ returnDate: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-white/10 bg-[#141824] text-white"
+                      className="w-full text-xs p-2.5 rounded-xl border border-white/10 bg-[#0f1d28] text-white"
                     />
                     <input
                       type="time"
                       value={searchState.returnTime}
                       onChange={(e) => updateSearch({ returnTime: e.target.value })}
-                      className="w-full text-xs p-2.5 rounded-xl border border-white/10 bg-[#141824] text-white"
+                      className="w-full text-xs p-2.5 rounded-xl border border-white/10 bg-[#0f1d28] text-white"
                     />
                   </div>
                 </div>
@@ -354,10 +354,10 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
                     <div className="space-y-2 pt-2 border-t border-rose-800/60">
                       <span className="text-[11px] font-bold uppercase text-rose-300 block">Available Alternatives:</span>
                       {alternatives.map((alt) => (
-                        <div key={alt.id} className="flex items-center justify-between bg-[#0e111a] p-2.5 rounded-xl border border-white/10 text-xs">
+                        <div key={alt.id} className="flex items-center justify-between bg-[#0e1724] p-2.5 rounded-xl border border-white/10 text-xs">
                           <div>
                             <span className="font-bold text-white block">{alt.brand} {alt.model}</span>
-                            <span className="text-[10px] text-[#00f2aa] font-bold">{formatCurrency(alt.pricing.daily_rate)}/day</span>
+                            <span className="text-[10px] text-[#bef237] font-bold">{formatCurrency(alt.pricing.daily_rate)}/day</span>
                           </div>
                           <Button size="sm" variant="outline" onClick={() => onSelectAlternative(alt)} className="text-xs bg-white/5 border-white/10 text-white">
                             View
@@ -371,10 +371,10 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
 
               {/* Pricing Breakdown Card */}
               {pricingBreakdown && (
-                <div className="rounded-2xl bg-[#141824] p-5 border border-white/5 space-y-3">
+                <div className="rounded-2xl bg-[#0f1d28] p-5 border border-white/5 space-y-3">
                   <div className="flex items-center justify-between text-xs font-bold text-white pb-2 border-b border-white/5">
                     <span>Pricing Summary</span>
-                    <span className="text-[#00f2aa] font-mono">{pricingBreakdown.durationFormatted}</span>
+                    <span className="text-[#bef237] font-mono">{pricingBreakdown.durationFormatted}</span>
                   </div>
 
                   <div className="space-y-2 text-xs">
@@ -400,7 +400,7 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
                   <div className="pt-3 border-t border-white/10 flex items-baseline justify-between">
                     <div>
                       <span className="text-xs font-bold text-white block">Total Payable Now</span>
-                      <span className="text-[10px] text-[#00f2aa] font-medium">Includes 100% refundable deposit</span>
+                      <span className="text-[10px] text-[#bef237] font-medium">Includes 100% refundable deposit</span>
                     </div>
                     <span className="text-2xl font-black text-white">
                       {formatCurrency(pricingBreakdown.totalPayable)}
@@ -420,24 +420,24 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
                     onProceedToCheckout(vehicle);
                   }
                 }}
-                className="w-full py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base bg-[#00f2aa] hover:bg-[#00d696] disabled:opacity-40 disabled:cursor-not-allowed text-slate-950 shadow-xl shadow-[#00f2aa]/25 transition-all cursor-pointer"
+                className="w-full py-3.5 px-4 rounded-2xl font-black text-sm sm:text-base bg-[#bef237] hover:bg-[#a3e635] disabled:opacity-40 disabled:cursor-not-allowed text-slate-950 shadow-xl shadow-[#bef237]/25 transition-all cursor-pointer"
               >
                 {isCheckingAvailability ? 'Checking Availability...' : isAvailable ? 'Book Now — Self Drive' : 'Vehicle Unavailable'}
               </button>
 
               {/* WhatsApp Inquiry Link */}
               <a
-                href={`https://wa.me/919876543210?text=Hi%20Rentro,%20I%20am%20interested%20in%20renting%20the%20${encodeURIComponent(vehicle.brand)}%20${encodeURIComponent(vehicle.model)}%20in%20Ahmedabad`}
+                href={`https://wa.me/919876543210?text=Hi%20Rentro,%20I%20am%20interested%20in%20renting%20the%20${encodeURIComponent(vehicle.brand)}%20${encodeURIComponent(vehicle.model)}`}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full py-3 px-4 rounded-2xl font-bold text-xs bg-white/5 hover:bg-white/10 text-white border border-white/15 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <MessageCircle className="w-4 h-4 text-[#00f2aa]" />
+                <MessageCircle className="w-4 h-4 text-[#bef237]" />
                 <span>Book / Inquire via WhatsApp</span>
               </a>
 
               <div className="flex items-center justify-center gap-2 text-[11px] text-slate-500 text-center">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#00f2aa]" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#bef237]" />
                 <span>Instant confirmation • Free cancellation up to 6 hrs prior</span>
               </div>
             </div>
@@ -446,7 +446,7 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
       </div>
 
       {/* Sticky Mobile Booking Bottom Bar */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0e111a]/95 backdrop-blur-xl border-t border-white/10 p-4 flex items-center justify-between shadow-2xl">
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0e1724]/95 backdrop-blur-xl border-t border-white/10 p-4 flex items-center justify-between shadow-2xl">
         <div>
           <span className="text-[10px] text-slate-400 block">Total Payable</span>
           <span className="text-lg font-black text-white">
@@ -464,7 +464,7 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
               onProceedToCheckout(vehicle);
             }
           }}
-          className="py-2.5 px-6 rounded-xl font-bold text-xs bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 disabled:opacity-40 cursor-pointer shadow-lg shadow-[#00f2aa]/20"
+          className="py-2.5 px-6 rounded-xl font-bold text-xs bg-[#bef237] hover:bg-[#a3e635] text-slate-950 disabled:opacity-40 cursor-pointer shadow-lg shadow-[#bef237]/20"
         >
           {isAvailable ? 'Book Self-Drive' : 'Unavailable'}
         </button>

@@ -32,7 +32,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onSuccess, onExi
   };
 
   return (
-    <div className="min-h-screen bg-[#07080c] text-white flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-[#080c14] text-white flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
       {/* Background glow lines */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none" />
 
@@ -49,13 +49,13 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onSuccess, onExi
         <div className="bg-[#11141e]/90 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
           <div className="text-center space-y-3">
             <div className="flex justify-center">
-              <Logo size="lg" subtitle="Ahmedabad Fleet Portal" />
+              <Logo size="lg" subtitle="Vadodara & Ahmedabad Fleet Portal" />
             </div>
             <h1 className="text-2xl font-black text-white tracking-tight">
               Fleet Admin Portal
             </h1>
             <p className="text-xs text-slate-400">
-              Authorized Ahmedabad operations staff and fleet managers only.
+              Authorized Vadodara & Ahmedabad operations staff and fleet managers only.
             </p>
           </div>
 
@@ -82,7 +82,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onSuccess, onExi
                   placeholder="Enter admin password"
                   required
                   autoFocus
-                  className="w-full rounded-xl bg-slate-900/90 border border-slate-800 px-3.5 py-3 pl-10 pr-10 text-sm text-white placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all font-mono"
+                  className="w-full rounded-xl bg-slate-900/90 border border-slate-800 px-3.5 py-3 pl-10 pr-10 text-sm text-white placeholder:text-slate-600 focus:border-[#bef237] focus:outline-none focus:ring-1 focus:ring-[#bef237] transition-all font-mono"
                 />
                 <button
                   type="button"
@@ -99,14 +99,14 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onSuccess, onExi
               type="submit"
               size="lg"
               isLoading={isLoading}
-              className="w-full font-bold text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg shadow-emerald-500/20 py-3"
+              className="w-full font-black text-sm bg-[#bef237] hover:bg-[#a3e635] text-slate-950 shadow-lg shadow-[#bef237]/20 py-3"
             >
               Sign In to Fleet Control
             </Button>
           </form>
 
           <div className="pt-2 text-center text-[11px] text-slate-500 border-t border-slate-800/80">
-            Protected endpoint • Ahmedabad Operations Hub
+            Protected endpoint • Vadodara & Ahmedabad Operations Hub
           </div>
         </div>
       </div>

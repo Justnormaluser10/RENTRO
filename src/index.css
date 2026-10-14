@@ -2,16 +2,17 @@
 
 @layer base {
   :root {
-    --brand-bg: #07080c;
-    --brand-surface: #0e111a;
-    --brand-surface-elevated: #141824;
+    --brand-bg: #080c14;
+    --brand-surface: #0e1724;
+    --brand-surface-elevated: #132030;
+    --brand-card-teal: #0f1d28;
     --brand-border: rgba(255, 255, 255, 0.08);
-    --brand-border-hover: rgba(255, 255, 255, 0.16);
+    --brand-border-hover: rgba(190, 242, 55, 0.25);
     --brand-text: #ffffff;
     --brand-muted: #94a3b8;
-    --brand-accent: #00f2aa;
-    --brand-accent-hover: #00d696;
-    --brand-accent-glow: rgba(0, 242, 170, 0.2);
+    --brand-accent: #bef237;
+    --brand-accent-hover: #a3e635;
+    --brand-accent-glow: rgba(190, 242, 55, 0.22);
   }
 
   * {
@@ -23,7 +24,7 @@
   }
 
   body {
-    background-color: #07080c;
+    background-color: #080c14;
     color: #ffffff;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -38,23 +39,23 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #07080c;
+  background: #080c14;
 }
 ::-webkit-scrollbar-thumb {
   background: #1e2433;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00f2aa;
+  background: #bef237;
 }
 
 /* Subtle futuristic neon glow utility */
 .neon-glow {
-  box-shadow: 0 0 25px rgba(0, 242, 170, 0.15);
+  box-shadow: 0 0 25px rgba(190, 242, 55, 0.18);
 }
 
 .neon-border {
-  border-color: rgba(0, 242, 170, 0.3);
+  border-color: rgba(190, 242, 55, 0.35);
 }
 
 /* Glassmorphism card surfaces */
@@ -90,7 +91,7 @@
 
 /* Leaflet Map Futuristic Dark Styling */
 .leaflet-container {
-  background: #07080c !important;
+  background: #080c14 !important;
   font-family: inherit;
   outline: none;
 }
@@ -100,11 +101,11 @@
 }
 
 .leaflet-container a {
-  color: #00f2aa !important;
+  color: #bef237 !important;
 }
 
 .leaflet-popup-content-wrapper {
-  background: #0e111a !important;
+  background: #0e1724 !important;
   color: #ffffff !important;
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
   border-radius: 16px !important;
@@ -112,7 +113,7 @@
 }
 
 .leaflet-popup-tip {
-  background: #0e111a !important;
+  background: #0e1724 !important;
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 

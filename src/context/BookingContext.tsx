@@ -3,7 +3,8 @@ import { Vehicle } from '../types';
 import { calculateDurationHours } from '../lib/utils';
 
 interface SearchState {
-  vehicleType: 'all' | 'car' | 'bike';
+  city: 'Ahmedabad' | 'Vadodara';
+  vehicleType: 'all' | 'car' | 'bike' | 'scooter' | 'ev';
   pickupLocationId: string;
   returnLocationId: string;
   pickupDate: string; // YYYY-MM-DD
@@ -44,9 +45,10 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
   twoDaysLater.setDate(twoDaysLater.getDate() + 2);
 
   const [searchState, setSearchState] = useState<SearchState>({
+    city: 'Ahmedabad',
     vehicleType: 'all',
-    pickupLocationId: 'loc-1',
-    returnLocationId: 'loc-1',
+    pickupLocationId: 'ahmedabad-sg-highway',
+    returnLocationId: 'ahmedabad-sg-highway',
     pickupDate: formatYYYYMMDD(tomorrow),
     pickupTime: '10:00',
     returnDate: formatYYYYMMDD(twoDaysLater),

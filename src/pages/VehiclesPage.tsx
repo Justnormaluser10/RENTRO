@@ -32,6 +32,7 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({ onSelectVehicle }) =
 
   const [filters, setFilters] = useState<FilterValues>({
     type: searchState.vehicleType,
+    city: (searchState.city as FilterValues['city']) || 'all',
     brand: 'all',
     fuel: 'all',
     transmission: 'all',
@@ -46,9 +47,10 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({ onSelectVehicle }) =
     setFilters((prev: FilterValues) => ({
       ...prev,
       type: searchState.vehicleType,
+      city: (searchState.city as FilterValues['city']) || prev.city,
       locationId: searchState.pickupLocationId || prev.locationId,
     }));
-  }, [searchState.vehicleType, searchState.pickupLocationId]);
+  }, [searchState.vehicleType, searchState.city, searchState.pickupLocationId]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,11 +71,15 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({ onSelectVehicle }) =
     if (updates.type) {
       updateSearch({ vehicleType: updates.type });
     }
+    if (updates.city && updates.city !== 'all') {
+      updateSearch({ city: updates.city });
+    }
   };
 
   const handleResetFilters = () => {
     setFilters({
       type: 'all',
+      city: 'all',
       brand: 'all',
       fuel: 'all',
       transmission: 'all',
@@ -88,8 +94,22 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({ onSelectVehicle }) =
   // Filter and Sort Vehicles
   const filteredVehicles = useMemo(() => {
     return vehicles.filter(v => {
-      // Type
-      if (filters.type !== 'all' && v.type !== filters.type) return false;
+      // 4 Categories / EV Propulsion filter
+      if (filters.type !== 'all') {
+        if (filters.type === 'ev') {
+          if (v.fuel !== 'electric') return false;
+        } else if (filters.type === 'scooter') {
+          if (v.type !== 'scooter' && v.category !== 'scooter') return false;
+        } else if (v.type !== filters.type) {
+          return false;
+        }
+      }
+
+      // City filter
+      if (filters.city !== 'all') {
+        if (v.location?.city.toLowerCase() !== filters.city.toLowerCase()) return false;
+      }
+
       // Brand
       if (filters.brand !== 'all' && v.brand.toLowerCase() !== filters.brand.toLowerCase()) return false;
       // Fuel
@@ -126,34 +146,36 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({ onSelectVehicle }) =
   const activeHub = locations.find(l => l.id === searchState.pickupLocationId) || locations[0];
 
   return (
-    <div className="min-h-screen bg-[#07080c] text-white py-8">
+    <div className="min-h-screen bg-[#080c14] text-white py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Active Booking Schedule Bar */}
-        <div className="bg-[#0e111a] rounded-3xl p-4 sm:p-5 border border-white/10 shadow-lg mb-8">
+        <div className="bg-[#0e1724] rounded-3xl p-4 sm:p-5 border border-white/10 shadow-lg mb-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-300">
               <div className="flex items-center gap-2 font-medium">
-                <MapPin className="w-4 h-4 text-[#00f2aa] shrink-0" />
-                <span><strong className="text-white">Hub:</strong> {activeHub?.name || 'All Ahmedabad Hubs'}</span>
+                <MapPin className="w-4 h-4 text-[#bef237] shrink-0" />
+                <span>
+                  <strong className="text-white">Market:</strong> {searchState.city || 'Vadodara + Ahmedabad'} — {activeHub?.name || 'All Hubs'}
+                </span>
               </div>
               <div className="hidden sm:block text-slate-700">•</div>
               <div className="flex items-center gap-2 font-medium">
-                <Calendar className="w-4 h-4 text-[#00f2aa] shrink-0" />
+                <Calendar className="w-4 h-4 text-[#bef237] shrink-0" />
                 <span><strong className="text-white">Pickup:</strong> {searchState.pickupDate} at {searchState.pickupTime}</span>
               </div>
               <div className="hidden sm:block text-slate-700">•</div>
               <div className="flex items-center gap-2 font-medium">
-                <Clock className="w-4 h-4 text-[#00f2aa] shrink-0" />
+                <Clock className="w-4 h-4 text-[#bef237] shrink-0" />
                 <span><strong className="text-white">Duration:</strong> {Math.round(durationHours)} hrs ({Math.round(durationHours / 24 * 10) / 10} days)</span>
               </div>
             </div>
 
             <button
               onClick={() => setShowDatesEdit(!showDatesEdit)}
-              className="self-start md:self-auto text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 cursor-pointer"
+              className="self-start md:self-auto text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 cursor-pointer"
             >
-              <span>{showDatesEdit ? 'Hide Date Picker' : 'Change Schedule'}</span>
+              <span>{showDatesEdit ? 'Hide Date Picker' : 'Change City & Schedule'}</span>
               <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showDatesEdit ? 'rotate-180' : ''}`} />
             </button>
           </div>
@@ -173,7 +195,7 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({ onSelectVehicle }) =
               value={filters.searchQuery}
               onChange={(e) => handleFilterChange({ searchQuery: e.target.value })}
               leftIcon={<Search className="w-4 h-4 text-slate-500" />}
-              className="bg-[#0e111a] border-white/10 text-white placeholder:text-slate-500"
+              className="bg-[#0e1724] border-white/10 text-white placeholder:text-slate-500"
             />
           </div>
 
@@ -185,7 +207,7 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({ onSelectVehicle }) =
               onClick={() => setMobileDrawerOpen(true)}
               className="lg:hidden gap-2 font-semibold text-xs bg-white/5 border-white/10 text-white"
             >
-              <SlidersHorizontal className="w-4 h-4 text-[#00f2aa]" />
+              <SlidersHorizontal className="w-4 h-4 text-[#bef237]" />
               <span>Filters ({filteredVehicles.length})</span>
             </Button>
 
@@ -195,7 +217,7 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({ onSelectVehicle }) =
               <select
                 value={filters.sortBy}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleFilterChange({ sortBy: e.target.value as FilterValues['sortBy'] })}
-                className="rounded-xl border border-white/10 bg-[#0e111a] px-3 py-2 text-xs font-semibold text-white focus:outline-none focus:border-[#00f2aa] cursor-pointer"
+                className="rounded-xl border border-white/10 bg-[#0e1724] px-3 py-2 text-xs font-semibold text-white focus:outline-none focus:border-[#bef237] cursor-pointer"
               >
                 <option value="recommended">Recommended</option>
                 <option value="price_low">Price: Low to High</option>
@@ -224,7 +246,7 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({ onSelectVehicle }) =
             {isLoading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[1, 2, 3, 4, 5, 6].map((n) => (
-                  <div key={n} className="rounded-3xl bg-[#0e111a] border border-white/10 p-4 h-80 animate-pulse">
+                  <div key={n} className="rounded-3xl bg-[#0e1724] border border-white/10 p-4 h-80 animate-pulse">
                     <div className="aspect-16/10 bg-white/5 rounded-2xl mb-4" />
                     <div className="h-4 bg-white/5 rounded w-2/3 mb-2" />
                     <div className="h-3 bg-white/5 rounded w-1/2 mb-4" />
@@ -233,8 +255,8 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({ onSelectVehicle }) =
                 ))}
               </div>
             ) : vehicles.length === 0 ? (
-              <div className="rounded-3xl bg-[#0e111a] border border-white/10 p-12 text-center space-y-5">
-                <div className="w-16 h-16 rounded-2xl bg-[#00f2aa]/10 border border-[#00f2aa]/20 text-[#00f2aa] flex items-center justify-center mx-auto shadow-lg shadow-[#00f2aa]/10">
+              <div className="rounded-3xl bg-[#0e1c26] border border-white/10 p-12 text-center space-y-5">
+                <div className="w-16 h-16 rounded-2xl bg-[#bef237]/10 border border-[#bef237]/20 text-[#bef237] flex items-center justify-center mx-auto shadow-lg shadow-[#bef237]/10">
                   <Car className="w-8 h-8" />
                 </div>
                 <div className="space-y-2 max-w-md mx-auto">
@@ -242,28 +264,28 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({ onSelectVehicle }) =
                     Your next ride is coming soon.
                   </h3>
                   <p className="text-sm text-slate-400">
-                    We're adding vehicles in Ahmedabad. Check back shortly.
+                    {filters.city === 'Vadodara'
+                      ? "Vadodara is our pilot market. We are partnering with local vehicle owners and rental operators to onboard verified rides."
+                      : "We're expanding verified inventory across Vadodara & Ahmedabad. Check back shortly or connect with our team."}
                   </p>
                 </div>
                 <div className="pt-2">
                   <a
-                    href="https://wa.me/919876543210?text=Hi%20Rentro,%20I%20am%20looking%20for%20a%20self-drive%20car/bike%20in%20Ahmedabad"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 font-bold text-xs shadow-lg shadow-[#00f2aa]/20 cursor-pointer"
+                    href="mailto:support@rentro.in"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#bef237] hover:bg-[#a3e635] text-slate-950 font-black text-xs shadow-lg shadow-[#bef237]/20 cursor-pointer"
                   >
-                    <span>Need a specific car or bike? Chat with us on WhatsApp</span>
+                    <span>Partner with Rentro or Request a Ride → support@rentro.in</span>
                   </a>
                 </div>
               </div>
             ) : filteredVehicles.length === 0 ? (
-              <div className="rounded-3xl bg-[#0e111a] border border-white/10 p-12 text-center space-y-4">
+              <div className="rounded-3xl bg-[#0e1c26] border border-white/10 p-12 text-center space-y-4">
                 <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-slate-400 mx-auto">
                   <Search className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-bold text-white">No vehicles match your criteria</h3>
+                <h3 className="text-lg font-bold text-white">No rides match your criteria</h3>
                 <p className="text-xs text-slate-400 max-w-sm mx-auto">
-                  Try adjusting your filters, location, or vehicle category to explore more options from our fleet.
+                  Try adjusting your category ({filters.type}), city ({filters.city}), or pickup hub to explore more options from our fleet.
                 </p>
                 <Button onClick={handleResetFilters} variant="outline" size="sm" className="bg-white/5 border-white/10 text-white">
                   Reset All Filters
@@ -297,3 +319,5 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({ onSelectVehicle }) =
     </div>
   );
 };
+
+export default VehiclesPage;

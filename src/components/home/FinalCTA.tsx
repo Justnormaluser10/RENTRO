@@ -1,6 +1,7 @@
 import React from 'react';
+import { Logo } from '../ui/Logo';
 import { Button } from '../ui/Button';
-import { ArrowRight, Sparkles, MessageCircle } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 interface FinalCTAProps {
   onBrowse: () => void;
@@ -8,52 +9,56 @@ interface FinalCTAProps {
 
 export const FinalCTA: React.FC<FinalCTAProps> = ({ onBrowse }) => {
   return (
-    <section className="relative overflow-hidden bg-[#07080c] text-white py-24 border-b border-white/5">
-      {/* Glow Orbs */}
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#00f2aa]/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
+    <section className="relative overflow-hidden bg-[#080c14] text-white py-20 sm:py-28 border-b border-white/5">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#bef237]/10 rounded-full blur-[180px] pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-7">
-        <div className="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-4 py-1 text-xs font-bold text-[#00f2aa]">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Ahmedabad's Premier Self-Drive Mobility Network</span>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
+        
+        {/* Official White Badge Logo — Matching PDF Page 10 */}
+        <div className="inline-block">
+          <Logo variant="badge" size="xl" showSubtitle={false} />
         </div>
 
+        {/* Heading from PDF Page 10 */}
         <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
-          Ready to hit the road?
+          Your next ride is one booking away.
         </h2>
 
-        <p className="text-sm sm:text-lg text-slate-300 max-w-xl mx-auto font-normal leading-relaxed">
-          Pick your favourite car or bike, book your hours, upload your licence, and take the wheel in Ahmedabad in minutes.
+        {/* Supporting text from PDF Page 10 */}
+        <p className="text-base sm:text-xl text-slate-300 font-bold tracking-wide">
+          24×7 service • Easy rentals • Affordable rates
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+        {/* CTA Button — Lime-green button from PDF Page 10 */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           <Button
             size="lg"
             onClick={onBrowse}
-            className="gap-2 text-sm sm:text-base font-bold bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 shadow-xl shadow-[#00f2aa]/25 px-8 py-3 rounded-2xl cursor-pointer"
+            className="w-full sm:w-auto gap-2 text-sm sm:text-base font-black bg-[#bef237] hover:bg-[#a3e635] text-slate-950 shadow-2xl shadow-[#bef237]/30 px-10 py-4 rounded-2xl cursor-pointer"
           >
-            <span>Browse Vehicles</span>
-            <ArrowRight className="w-5 h-5" />
+            <span>Explore All Rides & Book</span>
+            <ArrowRight className="w-5 h-5 stroke-[3]" />
           </Button>
-
-          <a
-            href="https://wa.me/919876543210?text=Hi%20Rentro,%20I'm%20ready%20to%20book%20a%20self-drive%20ride%20in%20Ahmedabad"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/15 font-bold text-sm sm:text-base transition-all cursor-pointer"
-          >
-            <MessageCircle className="w-5 h-5 text-[#00f2aa]" />
-            <span>Chat on WhatsApp</span>
-          </a>
         </div>
 
-        <div className="pt-8 border-t border-white/5 flex flex-wrap items-center justify-center gap-8 text-xs text-slate-400">
-          <span>✓ Zero Security Deduction Drama</span>
-          <span>✓ 100% Verified Fleet</span>
-          <span>✓ Same-to-Same Fuel Policy</span>
+        {/* Launch footer tag */}
+        <div className="pt-6 border-t border-white/5 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400 font-mono">
+          <span className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#bef237]"></span>
+            Vadodara (Pilot)
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#bef237]"></span>
+            Ahmedabad (Expansion)
+          </span>
+          <span>•</span>
+          <span>Bikes • Scooters • Cars • EVs</span>
         </div>
+
       </div>
     </section>
   );
 };
+
+export default FinalCTA;

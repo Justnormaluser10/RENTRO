@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Info, X } from 'lucide-react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { BookingProvider, useBooking } from './context/BookingContext';
 import { Navbar } from './components/layout/Navbar';
@@ -19,14 +20,14 @@ import { AdminVehiclesPage } from './pages/admin/AdminVehiclesPage';
 import { AdminBookingsPage } from './pages/admin/AdminBookingsPage';
 import { AdminKYCPage } from './pages/admin/AdminKYCPage';
 import { adminAuth } from './services/adminAuth';
-import { Vehicle } from './types';
 import { isSupabaseConfigured } from './lib/supabase';
-import { paymentService } from './services/payment';
-import { ShieldCheck, Info, X } from 'lucide-react';
+import { Vehicle } from './types';
 
 function AppContent() {
   const { user, isAdmin, isAuthenticated } = useAuth();
   const { setDraftVehicle } = useBooking();
+
+  const [showDevBanner, setShowDevBanner] = useState<boolean>(true);
 
   // Simple client-side routing
   const [currentPath, setCurrentPath] = useState<string>(() => {
@@ -39,9 +40,6 @@ function AppContent() {
 
   // Admin Tab State
   const [adminTab, setAdminTab] = useState<'overview' | 'vehicles' | 'bookings' | 'kyc'>('overview');
-
-  // Dev Notice Banner
-  const [showDevBanner, setShowDevBanner] = useState<boolean>(true);
 
   const navigate = (path: string) => {
     setCurrentPath(path);
@@ -119,14 +117,14 @@ function AppContent() {
   // CUSTOMER SITE ROUTING
   // -------------------------------------------------------------
   return (
-    <div className="min-h-screen flex flex-col bg-[#07080c] text-white selection:bg-[#00f2aa]/30 selection:text-[#00f2aa]">
+    <div className="min-h-screen flex flex-col bg-[#080c14] text-white selection:bg-[#bef237]/30 selection:text-[#bef237]">
       {/* Dev Mode Environment Info Banner */}
       {showDevBanner && !isSupabaseConfigured && (
-        <div className="bg-[#0e111a] text-slate-300 px-4 py-2 text-xs border-b border-white/10 flex items-center justify-between z-50">
+        <div className="bg-[#0e1724] text-slate-300 px-4 py-2 text-xs border-b border-white/10 flex items-center justify-between z-50">
           <div className="flex items-center gap-2 max-w-4xl mx-auto text-center sm:text-left">
-            <Info className="w-4 h-4 text-[#00f2aa] shrink-0 hidden sm:inline" />
+            <Info className="w-4 h-4 text-[#bef237] shrink-0 hidden sm:inline" />
             <span>
-              <strong>Rentro Ahmedabad Live Preview:</strong> Real-time self-drive booking engine. Manage fleet in Admin Portal (Password: <code className="text-[#00f2aa] font-mono">RENTRO10</code>).
+              <strong>Rentro Live Preview:</strong> Vadodara + Ahmedabad self-drive platform. Manage fleet in Admin Portal (Password: <code className="text-[#bef237] font-mono font-bold">RENTRO10</code>).
             </span>
           </div>
           <button
@@ -174,13 +172,13 @@ function AppContent() {
             <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center space-y-4">
               <h2 className="text-2xl font-black text-white">No Vehicle Selected for Checkout</h2>
               <p className="text-xs text-slate-400 max-w-sm">
-                Please browse our self-drive fleet in Ahmedabad and select a vehicle to begin reservation.
+                Please browse our self-drive fleet in Vadodara or Ahmedabad and select a vehicle to begin reservation.
               </p>
               <button
                 onClick={() => navigate('/vehicles')}
-                className="py-3 px-6 rounded-xl font-black text-xs bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 shadow-lg shadow-[#00f2aa]/20 cursor-pointer"
+                className="py-3 px-6 rounded-xl font-black text-xs bg-[#bef237] hover:bg-[#a3e635] text-slate-950 shadow-lg shadow-[#bef237]/20 cursor-pointer"
               >
-                Browse Ahmedabad Fleet
+                Browse Fleet
               </button>
             </div>
           )

@@ -160,13 +160,13 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#07080c] text-white py-10 pb-20">
+    <div className="min-h-screen bg-[#080c14] text-white py-10 pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Back Link */}
         <button
           onClick={currentStep === 2 ? () => setCurrentStep(1) : onBack}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-[#00f2aa] transition-colors mb-6 cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-[#bef237] transition-colors mb-6 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>{currentStep === 2 ? 'Back to Customer Details' : 'Back to Vehicle Page'}</span>
@@ -175,9 +175,9 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
         {/* Progress Bar */}
         <div className="mb-8 bg-[#0e111a] rounded-3xl p-4 border border-white/10 shadow-lg">
           <div className="flex items-center justify-between text-xs font-bold text-slate-400 max-w-lg mx-auto">
-            <div className={`flex items-center gap-2 ${currentStep >= 1 ? 'text-[#00f2aa]' : ''}`}>
+            <div className={`flex items-center gap-2 ${currentStep >= 1 ? 'text-[#bef237]' : ''}`}>
               <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-black ${
-                currentStep >= 1 ? 'bg-[#00f2aa] text-slate-950' : 'bg-white/10 text-slate-400'
+                currentStep >= 1 ? 'bg-[#bef237] text-slate-950' : 'bg-white/10 text-slate-400'
               }`}>
                 1
               </div>
@@ -186,9 +186,9 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
 
             <div className="h-0.5 w-16 bg-white/10" />
 
-            <div className={`flex items-center gap-2 ${currentStep === 2 ? 'text-[#00f2aa]' : ''}`}>
+            <div className={`flex items-center gap-2 ${currentStep === 2 ? 'text-[#bef237]' : ''}`}>
               <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-black ${
-                currentStep === 2 ? 'bg-[#00f2aa] text-slate-950' : 'bg-white/10 text-slate-400'
+                currentStep === 2 ? 'bg-[#bef237] text-slate-950' : 'bg-white/10 text-slate-400'
               }`}>
                 2
               </div>
@@ -209,7 +209,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
           {/* Main Step Form (7 cols) */}
           <div className="lg:col-span-7 space-y-6">
             {currentStep === 1 && (
-              <div className="bg-[#0e111a] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl space-y-6">
+              <div className="bg-[#0e1724] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl space-y-6">
                 <div>
                   <h2 className="text-xl font-black text-white tracking-tight">Step 1: Driver Information</h2>
                   <p className="text-xs text-slate-400 mt-0.5">
@@ -250,7 +250,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                   <div>
                     <h3 className="text-sm font-bold text-white">Driving Licence Verification (KYC)</h3>
                     <p className="text-xs text-slate-400 mt-0.5">
-                      Required by Motor Vehicles Act for self-drive vehicle handover at Ahmedabad hubs.
+                      Required by Motor Vehicles Act for self-drive vehicle handover at Vadodara & Ahmedabad hubs.
                     </p>
                   </div>
 
@@ -274,7 +274,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                         </div>
                       )}
 
-                      <label className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-white/15 rounded-2xl p-4 text-center hover:border-[#00f2aa] hover:bg-[#00f2aa]/5 transition-colors cursor-pointer bg-[#141824]">
+                      <label className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-white/15 rounded-2xl p-4 text-center hover:border-[#bef237] hover:bg-[#bef237]/5 transition-colors cursor-pointer bg-[#0f1d28]">
                         <Upload className="w-5 h-5 text-slate-400 mb-1" />
                         <span className="text-xs font-semibold text-slate-300">
                           {licenceFile ? licenceFile.name : 'Click to upload or take a photo'}
@@ -290,8 +290,8 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                     </div>
                   </div>
 
-                  <div className="rounded-2xl bg-[#00f2aa]/10 border border-[#00f2aa]/20 p-3.5 flex items-center gap-2 text-xs text-slate-300">
-                    <ShieldCheck className="w-4 h-4 text-[#00f2aa] shrink-0" />
+                  <div className="rounded-2xl bg-[#bef237]/10 border border-[#bef237]/20 p-3.5 flex items-center gap-2 text-xs text-slate-300">
+                    <ShieldCheck className="w-4 h-4 text-[#bef237] shrink-0" />
                     <span>Your documents are stored privately with end-to-end encryption and only reviewed by authorized Rentro fleet staff.</span>
                   </div>
                 </div>
@@ -299,7 +299,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                 <button
                   type="button"
                   onClick={handleProceedToPayment}
-                  className="w-full py-3.5 px-4 rounded-2xl font-black text-sm bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 shadow-xl shadow-[#00f2aa]/20 transition-all cursor-pointer"
+                  className="w-full py-3.5 px-4 rounded-2xl font-black text-sm bg-[#bef237] hover:bg-[#a3e635] text-slate-950 shadow-xl shadow-[#bef237]/20 transition-all cursor-pointer"
                 >
                   Proceed to Review & Payment
                 </button>
@@ -307,7 +307,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
             )}
 
             {currentStep === 2 && (
-              <div className="bg-[#0e111a] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl space-y-6">
+              <div className="bg-[#0e1724] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl space-y-6">
                 <div>
                   <h2 className="text-xl font-black text-white tracking-tight">Step 2: Confirm & Pay</h2>
                   <p className="text-xs text-slate-400 mt-0.5">
@@ -316,14 +316,14 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                 </div>
 
                 {/* Driver summary card */}
-                <div className="p-4 rounded-2xl bg-[#141824] border border-white/5 text-xs space-y-1.5">
+                <div className="p-4 rounded-2xl bg-[#0f1d28] border border-white/5 text-xs space-y-1.5">
                   <div className="flex justify-between">
                     <span className="text-slate-400 font-medium">Driver:</span>
                     <span className="font-bold text-white">{fullName} ({phone})</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400 font-medium">Licence:</span>
-                    <span className="font-mono text-[#00f2aa]">{licenceNumber} (Verified)</span>
+                    <span className="font-mono text-[#bef237]">{licenceNumber} (Verified)</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400 font-medium">Pickup Hub:</span>
@@ -332,9 +332,9 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                 </div>
 
                 {/* Payment Method Badge */}
-                <div className="border border-white/10 bg-[#141824] rounded-2xl p-4 flex items-center justify-between">
+                <div className="border border-white/10 bg-[#0f1d28] rounded-2xl p-4 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#00f2aa]/10 border border-[#00f2aa]/20 text-[#00f2aa] flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-[#bef237]/10 border border-[#bef237]/20 text-[#bef237] flex items-center justify-center">
                       <CreditCard className="w-5 h-5" />
                     </div>
                     <div>
@@ -346,7 +346,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                       </span>
                     </div>
                   </div>
-                  <span className="text-[10px] font-bold text-[#00f2aa] bg-[#00f2aa]/10 border border-[#00f2aa]/20 px-2.5 py-1 rounded-full">
+                  <span className="text-[10px] font-bold text-[#bef237] bg-[#bef237]/10 border border-[#bef237]/20 px-2.5 py-1 rounded-full">
                     256-Bit SSL
                   </span>
                 </div>
@@ -355,14 +355,14 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                   type="button"
                   onClick={handleInitiatePayment}
                   disabled={isProcessing}
-                  className="w-full py-4 px-6 rounded-2xl font-black text-base bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 shadow-xl shadow-[#00f2aa]/25 transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full py-4 px-6 rounded-2xl font-black text-base bg-[#bef237] hover:bg-[#a3e635] text-slate-950 shadow-xl shadow-[#bef237]/25 transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   <Lock className="w-4 h-4" />
                   <span>Pay {formatCurrency(pricingBreakdown.totalPayable)} & Confirm Booking</span>
                 </button>
 
                 <div className="text-center text-[11px] text-slate-500">
-                  By clicking Pay, you agree to Rentro's Rental Agreement, Fuel Policy, and Ahmedabad Safety Guidelines.
+                  By clicking Pay, you agree to Rentro's Rental Agreement, Fuel Policy, and Safety Guidelines.
                 </div>
               </div>
             )}
@@ -370,8 +370,8 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
 
           {/* Right Column: Reservation Summary Card (5 cols) */}
           <div className="lg:col-span-5 sticky top-24 space-y-6">
-            <div className="bg-[#0e111a] rounded-3xl p-6 border border-white/10 shadow-xl space-y-5">
-              <h3 className="text-xs font-bold text-[#00f2aa] uppercase tracking-wider">
+            <div className="bg-[#0e1724] rounded-3xl p-6 border border-white/10 shadow-xl space-y-5">
+              <h3 className="text-xs font-bold text-[#bef237] uppercase tracking-wider">
                 Booking Summary
               </h3>
 
@@ -383,7 +383,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                   className="w-18 h-14 rounded-2xl object-cover border border-white/10 shrink-0"
                 />
                 <div>
-                  <span className="text-[10px] font-bold text-[#00f2aa] uppercase tracking-wider block">
+                  <span className="text-[10px] font-bold text-[#bef237] uppercase tracking-wider block">
                     {vehicle.brand}
                   </span>
                   <h4 className="text-sm font-bold text-white">{vehicle.model}</h4>
@@ -394,7 +394,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
               {/* Date / Time Details */}
               <div className="space-y-2.5 text-xs">
                 <div className="flex items-start gap-2.5">
-                  <Calendar className="w-4 h-4 text-[#00f2aa] shrink-0 mt-0.5" />
+                  <Calendar className="w-4 h-4 text-[#bef237] shrink-0 mt-0.5" />
                   <div>
                     <span className="text-slate-400 block">Pickup:</span>
                     <span className="font-semibold text-white">{formatDateTime(startDateTimeISO)}</span>
@@ -402,7 +402,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                 </div>
 
                 <div className="flex items-start gap-2.5">
-                  <Clock className="w-4 h-4 text-[#00f2aa] shrink-0 mt-0.5" />
+                  <Clock className="w-4 h-4 text-[#bef237] shrink-0 mt-0.5" />
                   <div>
                     <span className="text-slate-400 block">Return:</span>
                     <span className="font-semibold text-white">{formatDateTime(endDateTimeISO)}</span>
@@ -410,7 +410,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                 </div>
 
                 <div className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-[#00f2aa] shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-[#bef237] shrink-0 mt-0.5" />
                   <div>
                     <span className="text-slate-400 block">Hub Location:</span>
                     <span className="font-semibold text-white">{vehicle.location?.name}</span>
@@ -438,7 +438,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
                 <div className="pt-3 border-t border-white/10 flex items-baseline justify-between text-white">
                   <div>
                     <span className="text-sm font-bold block">Total Amount</span>
-                    <span className="text-[10px] text-[#00f2aa] font-medium">100% Refundable deposit included</span>
+                    <span className="text-[10px] text-[#bef237] font-medium">100% Refundable deposit included</span>
                   </div>
                   <span className="text-2xl font-black text-white">
                     {formatCurrency(pricingBreakdown.totalPayable)}
@@ -462,7 +462,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
             <strong>Running in Development Mode:</strong> You can test both successful booking confirmation and payment failure scenarios right now.
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#141824] border border-white/10 space-y-2 text-xs">
+          <div className="p-4 rounded-2xl bg-[#0f1d28] border border-white/10 space-y-2 text-xs">
             <div className="flex justify-between">
               <span className="text-slate-400">Vehicle:</span>
               <span className="font-bold text-white">{vehicle.brand} {vehicle.model}</span>
@@ -473,14 +473,14 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({
             </div>
             <div className="flex justify-between">
               <span className="text-slate-400">Amount to Pay:</span>
-              <span className="font-black text-[#00f2aa] text-base">{formatCurrency(pricingBreakdown.totalPayable)}</span>
+              <span className="font-black text-[#bef237] text-base">{formatCurrency(pricingBreakdown.totalPayable)}</span>
             </div>
           </div>
 
           <div className="space-y-2 pt-2">
             <button
               type="button"
-              className="w-full py-3 px-4 rounded-xl font-black text-sm bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 shadow-lg shadow-[#00f2aa]/20 transition-all cursor-pointer disabled:opacity-50"
+              className="w-full py-3 px-4 rounded-xl font-black text-sm bg-[#bef237] hover:bg-[#a3e635] text-slate-950 shadow-lg shadow-[#bef237]/20 transition-all cursor-pointer disabled:opacity-50"
               onClick={() => executeAtomicBookingCreation('test_mode')}
               disabled={isProcessing}
             >

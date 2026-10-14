@@ -44,8 +44,8 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onNavigateLog
   };
 
   return (
-    <div className="min-h-screen bg-[#07080c] text-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-6 bg-[#0e111a] p-8 rounded-3xl border border-white/10 shadow-2xl">
+    <div className="min-h-screen bg-[#080c14] text-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-6 bg-[#0e1724] p-8 rounded-3xl border border-white/10 shadow-2xl">
         <div className="text-center space-y-3">
           <div className="flex justify-center">
             <Logo size="lg" />
@@ -54,7 +54,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onNavigateLog
             Create Your Rentro Account
           </h2>
           <p className="text-xs text-slate-400">
-            Sign up in 30 seconds to book self-drive cars and bikes in Ahmedabad.
+            Sign up in 30 seconds to book self-drive rides in Vadodara & Ahmedabad.
           </p>
         </div>
 
@@ -102,11 +102,11 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onNavigateLog
 
           <div className="text-xs text-slate-400 space-y-1.5 pt-1">
             <div className="flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5 text-[#00f2aa]" />
+              <Check className="w-3.5 h-3.5 text-[#bef237]" />
               <span>Must be at least 21 years old</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Check className="w-3.5 h-3.5 text-[#00f2aa]" />
+              <Check className="w-3.5 h-3.5 text-[#bef237]" />
               <span>Valid Indian Driving Licence required at pickup</span>
             </div>
           </div>
@@ -114,7 +114,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onNavigateLog
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 px-4 rounded-xl font-black text-sm bg-[#00f2aa] hover:bg-[#00d696] text-slate-950 shadow-lg shadow-[#00f2aa]/20 transition-all cursor-pointer mt-2 disabled:opacity-50"
+            className="w-full py-3 px-4 rounded-xl font-black text-sm bg-[#bef237] hover:bg-[#a3e635] text-slate-950 shadow-lg shadow-[#bef237]/20 transition-all cursor-pointer mt-2 disabled:opacity-50"
           >
             {isLoading ? 'Creating Account...' : 'Create Account & Get Started'}
           </button>
@@ -124,7 +124,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({ onSuccess, onNavigateLog
           Already have an account?{' '}
           <button
             onClick={onNavigateLogin}
-            className="font-bold text-[#00f2aa] hover:underline cursor-pointer"
+            className="font-bold text-[#bef237] hover:underline cursor-pointer"
           >
             Sign In Here
           </button>

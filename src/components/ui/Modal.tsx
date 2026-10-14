@@ -55,7 +55,7 @@ export const Modal: React.FC<ModalProps> = ({
       {/* Modal Container */}
       <div
         className={cn(
-          'relative w-full rounded-3xl bg-[#0e111a] text-white p-6 sm:p-7 shadow-2xl transition-all border border-white/15 z-10 my-8',
+          'relative w-full rounded-3xl bg-[#0e1724] text-white p-6 sm:p-7 shadow-2xl transition-all border border-white/15 z-10 my-8',
           maxWidths[maxWidth]
         )}
       >
